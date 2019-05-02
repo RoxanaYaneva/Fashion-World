@@ -1,0 +1,770 @@
+body{
+    width: 100%;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    height: 1600px;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* headers */
+
+#headerNav, #mainNav{
+    position: fixed;
+    z-index: 100;
+    top: 0px;
+}
+
+#headerNav{ 
+    width: 100%;
+    background-color: black;
+}
+
+.normalWhite {
+    color:white;
+    font-size:0.7em;
+    font-weight: bold;
+}
+
+a>h1>span:first-child{
+    text-decoration: underline;
+    font-size:1.8em;
+    font-weight: bold;
+}
+
+a>h1>span:last-child{
+    font-size:2em;
+    font-weight: bold;
+}
+
+
+#search{
+    position: relative;
+    top:-2px;
+    left:450px;
+} 
+
+#searchByTitle{
+    position: relative;
+    top: 3.2px;
+    left: -6.6px;
+    display: inline-block;
+    width: 50px;
+    height: 32px;
+    font-size: 20px;
+    background-color:#FFAAAA;
+    border: none;
+    color: white;
+    cursor: pointer;      
+}
+
+
+#title{
+    position: relative;
+    top:30px;
+    left:160px;
+}
+
+#headerNav img{
+    width: 25px;
+}
+
+#headerNav ul{
+    position: relative;
+    top:-44px;
+    right:160px;
+    float:right; 
+}
+
+#mainNav li, #headerNav li{
+    display:inline-block;
+    text-align: center;
+    padding:0.3em;
+    opacity: 0.7;
+}
+
+#headerNav>h1, #search{
+    display: inline-block;
+}
+
+
+/* main header */
+
+#mainNav{
+   
+    top: 90px;
+    width: 100%;
+    height: 40px;
+    background-color: #DDDDDD;
+    font-size:0.8em;
+    
+}
+
+#mainNav a{
+    color:black;
+}
+
+#mainNav div{
+    display: inline-block;
+    position: relative;
+}
+
+#mainNav div:last-child{
+    top: 12px;
+    left:-156px;
+    float:right;
+}
+
+#mainNav div:first-child{
+    top: 12px;
+    left:156px;
+    
+}
+
+#mainNav a.pink{
+    color:#9d0052;
+}
+
+main{
+    height: 1400px;
+    width: 78%;
+    margin:auto;
+   
+}
+
+
+footer{
+    position: relative;
+    width: 100%;
+    background-color:black;
+    height: 470px;
+    font-size:0.9em;
+}
+
+h3{
+    font-weight: bold;
+     margin: 1em 0.4em;
+     display: inline-block;
+}
+
+footer div>h4:first-child{
+   margin-top:3em;
+}
+
+footer li, footer a{
+    color:white;
+    margin:0.3em;
+    
+}
+
+footer>div{
+    color:white;
+    position: relative;
+    left:158px;
+    margin:0em 7.3em 2em 0em;
+    float:left;
+    opacity:0.6;
+}
+
+#socialMedias img{
+    width:30px;
+    height: 30px;
+    opacity: 0.5;
+}
+
+
+#payInfo{
+    margin: 1em 0em;
+    padding: 1em 0em;
+    width: 78%;
+    border-top: 1px ridge gray;
+    border-bottom: 1px ridge gray;
+
+}
+
+
+
+#payInfo img{
+    width: 120px;
+    margin: 1em;
+}
+
+#payInfo>div{
+   float:left;
+   margin: 0em 9em 1em 0em;
+}
+
+#mainDiv{
+    display: none;
+}
+
+
+#mainSection h4{
+    margin: 1em 0em;
+}
+
+#mainSection, #cartSection{
+    position: relative;
+    top:140px;
+    text-decoration: underline;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+#loginDiv, #registerDiv{
+    display: inline-block;
+    width: 100%;
+
+}
+
+
+
+#registerDiv input[type='text'], #registerDiv input[type='password'],
+#loginDiv input[type='text'], #loginDiv input[type='password']{
+    width: 50%;
+    height: 40px;
+    padding: 2em;
+    position: relative;
+    top: 175px;
+    left: 280px;
+    margin: 1em;
+
+}
+
+#loginButton, #regButton{
+    position: relative;
+    top:150px;
+    left:358px;
+    width:200px;
+    height: 40px;
+    line-height: 2em;
+    background-color:white;
+    border:none;
+    border-bottom: 2px ridge #FFAAAA;
+}
+
+#conditions{
+    padding: 2em;
+    position: relative;
+    top: 135px;
+    left: 245px;
+    margin: 1em;
+}
+
+#logIn, #register{
+    background-color: #FFAAAA;
+    padding: 2em;
+    position: relative;
+    width: 562px;
+    top: 180px;
+    left: 280px;
+    margin: 1em;
+    border: none;
+    line-height: 0.3em;
+    height: 40px;
+    font-weight: bold;
+}
+
+#register{
+    top:80px;
+}
+
+#faq{
+    display: none;
+}
+main dl{
+    position: relative;
+    top:250px;
+    padding: 2em;
+    background-color: #E6E6E6
+}
+main dt{
+    padding: 1em;
+    font-weight: bold;
+    cursor: pointer;
+   
+}
+
+main dd{
+    padding: 0.4em 1em;
+
+}
+
+
+
+
+dt span{
+    color: #9d2350;
+    height: 5px;
+}
+
+
+#helpOptions button{
+    position: relative;
+
+}
+
+button{
+    position: relative;
+    top: 200px;
+    left: -1px;
+    border: none;
+    background-color: #FFAAAA;
+    border-radius: 8%;
+    width: 221px;
+    height: 67px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#faqButton{
+    top:191px;
+}
+
+.help{
+    
+    position: relative;
+    background-color: #E6E6E6;
+    top:250px;
+    height: 100;
+    padding: 1.5em;
+}
+
+.help h1{
+    margin: 1em;
+    font-size:2em;
+    font-weight: bold;
+    color:#9d0052;
+}
+
+.help p{
+    margin: 0.5em;
+    padding: 0.5em;
+    line-height: 1.5em;
+}
+
+
+#profileDiv, #filterTemplate{
+display:none;
+}
+
+#profileSection aside{
+    width:20%;
+  
+    height: 1000px;
+    display: inline-block;    
+}
+
+#profileSection ul{
+    list-style-type: disc;
+    color:#9d0052;
+    position: relative;
+    padding: 2em;
+}
+
+#profileSection a{
+    color: black;
+    font-size: 0.9em;
+    line-height: 2em;
+    border-bottom:1px solid #9d0052;
+    border-radius: 12%;
+}
+
+#mainMenuW, #mainMenuB, #mainMenuM{
+    position: absolute; 
+    width: 1110px;
+    height: 200px; 
+    top:130px; 
+    left:160px; 
+    display: none;
+    background-color: #F5F5F5;
+}
+
+#profileSection section{
+   float: right;
+    width:76.8%;
+    display: inline-block;
+    left: -20px;
+}
+
+#profileSection{
+    position: relative;
+    top:165px;
+    
+}
+
+#profileSection section div{
+    background-color: #E6E6E6;
+    width: 99%;
+    margin-bottom:2em;
+    padding: 1em;
+    overflow: auto;
+    max-height: 1000px;
+   
+}
+
+#profileSection section div form{
+    padding: 1em;
+    line-height: 1em;
+}
+
+#profileSection h1{
+    color: #9d0052;
+}
+
+#profileSection input[type=submit]{
+    width: 250px;
+    height: 30px;
+    background-color: #9d0052;
+    border-radius: 15%;
+    font-weight: bold;
+}
+
+#categories a:hover{
+    color:#9d0052;
+}
+
+
+
+#filters{
+   float:left;
+    position: relative;
+    top:160px;
+    left: 0px;
+    width: 20%;
+    padding:1em;
+    max-height: 1000px;
+
+    
+}
+
+#filters h1, h2{
+    font-weight: bold;
+    color:#9d0052;
+    font-size:20px
+}
+
+#menSelections, #womenSelections, #productSelections{
+    position: relative;
+    top:160px;
+    float:right;
+    width: 78%;
+    max-height: 1000px;
+    overflow:auto;
+}
+
+
+#Address table, #Card table{
+    margin: 1em 0em;
+    padding: 0.5em 1.8em;
+    width: 93%;
+    height:auto;
+}
+
+#Address table td, #Card table td{
+    border:1px ridge gray;
+    padding: 0.5em;
+    color:black;
+    text-align: center;
+}
+
+#Card button{
+    top:0px;
+    width: 110px;
+    height: 40px;
+
+}
+
+#Address #addAddress{
+    width: 106px;
+    height: 40px;
+}
+
+
+#Address button{
+    top:0px;
+    width:110px;
+    height: 30px;
+}
+#Card span, #Address span{
+    color: #FFAAAA;
+    cursor: pointer;
+    font-size: 3em;
+    position: relative;
+    left: 300px;
+    top: -76px;
+    background-color: white;
+    border-radius: 40%;
+
+}
+
+
+#Card p, #Address p{
+    padding:0.2em;
+}
+
+.saveAddress, .saveCard{
+    display:none;
+}
+
+#womenSelections, #menSelections{
+    display: none;
+}
+
+
+#womenSelections tr, #menSelections tr, #productSelections tr{
+   display:inline-block;
+   width: 250px;
+   margin:1.1em;
+   text-align: center;
+   padding:1em;
+   font-weight: bold;
+   cursor: pointer;
+}
+#actualSelections tr{
+    display:inline-block;
+    width: 49%;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+#actualSelections img{
+    width:190px;
+}
+
+#womenSelections span, #menSelections span, #productSelections span, #actualSelections span{
+    display: inline-block;
+    background-color:black;
+    color:#9d0052;
+    width:250px;
+    height: 30px;
+    line-height: 2em;
+}
+
+#item{
+    display:none;
+}
+
+#actualSelections div{
+    width: 49%;
+    display: inline-block;
+    height: 1000px;
+    overflow: auto;
+    margin:1em 0em;
+}
+
+
+
+#actualSelections div:last-child h2{
+    color:#6495ED;
+}
+
+
+
+
+#minImgs img{
+    border: 1px ridge;
+    margin:1em;
+}
+
+#minImgs{
+    width: 20%;
+    display: inline-block;
+    height: 700px;
+    
+}
+#bigImg{
+    float: left;
+    margin: 1em;
+    display: inline-block;
+    width: 40%;
+    height: 700px;
+}
+
+#info{
+    float: right;
+    display: inline-block;
+    width: 30%;
+    margin: 2em 2em 1em 0em;
+    height: 700px;
+}
+
+#desc button{
+
+}
+
+#singleItem{
+    position: relative;
+    height: 1100px;
+    top: 170px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+#info button{
+    border: none;
+    background-color: #FFAAAA;
+    border-radius: 8%;
+    width: 120px;
+    height: 60px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#info button:last-of-type{
+    position: relative;
+    top: 213px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#info h1{
+    font-weight: bold;
+    color:#9d0052;
+    border-top: 1px ridge;
+    border-bottom: 1px ridge;
+    padding:1em 0.2em;
+    margin:1em 0em;
+    font-size:2em;
+}
+
+#info p{
+    padding:0.5em;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+#desc button{
+    position: relative;
+    top: 0px;
+    margin: 1em 1em 2em 1em;
+    width: 300px;
+}
+
+#desc{
+    margin:3em;
+}
+
+.hidden{
+    display: none
+}
+
+#addFav~p{
+    display: none;
+}
+
+#favTable, #ordTable{
+    width: 75%;
+}
+
+#favTable button, #deleteAll{
+    position: static;
+    float:right;
+    background-color: #FFAAAA;
+    border-radius: 8%;
+    width: 100px;
+    height: 40px;
+    margin:0.2em;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#deleteAll{
+    width: 500px; 
+}
+
+#favTable img, #ordTable img{
+    position: relative;
+    top: 50px;
+}
+
+#favTable span, #ordTable span{
+    position: relative;
+    top:0px;
+    line-height: 1em;
+}
+
+#cartTable td {
+    padding: 1em;
+}
+
+#cartTable caption {
+    margin: 1em 1em 2em;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#cartTable {
+    margin: auto;
+}
+
+#cartTable button{
+    position: relative;
+    top:0px;
+    float:right;
+    background-color: #FFAAAA;
+    font-weight: bold;
+    border-radius: 8%;
+    width: 100px;
+    height: 40px;
+    margin:0.2em;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#purchaseBut{
+    position: relative;
+    top:0px;
+    background-color: cornflowerblue;
+    font-weight: bold;
+    border-radius: 8%;
+    width: 600px;
+    height: 40px;
+    margin:0.2em;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#cartTable .items {
+    cursor: pointer;
+}
+
+.hidden{
+    display: none;
+}
+
+#videostream video {
+    max-width: 300px;
+    margin: 0 150px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    padding: 0;
+}
+
+#chat:hover{
+    cursor: pointer;
+}
+
+#chatroom{
+    height:500px;
+    width:100%;
+    background:cornsilk;
+  }
+
+  #bigImg img{
+      width: 100%;
+  }
+  #addToCart{
+      position: relative;
+    top:37px;
+  }

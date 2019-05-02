@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Модна дестинация #1</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <link rel="stylesheet" href="assets/styles/reset.css">
+    <link rel="stylesheet" href="assets/styles/styles.css">
+    <link rel="stylesheet" href="assets/styles/modal.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/request.js"></script>
+    <script src="js/productService.js"></script>
+    <script src="js/cartService.js"></script>
+    <script src="js/userService.js"></script>
+    <script src="js/chat.js"></script>
+    <script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
+    <script src="js/controllers/router.js"></script>
+    <script src="js/controllers/loginRegisterController.js"></script>
+    <script src="js/controllers/homeController.js"></script>
+    <script src="js/controllers/helpController.js"></script>
+    <script src="js/controllers/userController.js"></script>
+    <script src="js/controllers/productController.js"></script>
+    
+
+
+    <script src="js/controllers/cartController.js"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+ 
+</head>
+
+<body>
+
+    <header>
+        <nav id='headerNav'>
+            <a href="#home">
+                <h1 id='title'>
+                    <span class='normalWhite'>FASHION</span>
+                    <span class='normalWhite'>days</span>
+                </h1>
+            </a>
+
+            <div id='search'>
+                <input type="text" list="productList" placeholder="Търси в уебсайта..." id='searchItem' maxlength='30' name='searchItem'
+                    size=35 style="height:30px">
+                <datalist id="productList">
+                </datalist>
+                <button class='pink' id='searchByTitle'>
+                    <span>&#8981;</span>
+                </button>
+            </div>
+
+            <script id="searchTemplate" type="text/x-handlebars-template">
+                {{#each product}}
+                <option value="{{product_name}}"/>
+                {{/each}}
+            </script>
+
+            <div>
+                <ul>
+                    <li id='profile'>
+                        <a href='#loginRegister'>
+                            &nbsp;
+                            <img src='assets/images/profileIcon.png' />
+                            <br />
+                            <span class='normalWhite'>ВХОД</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='#help'>
+                            <img src="assets/images/questionIcon.png" alt="">
+                            <br />
+                            <span class='normalWhite'>ПОМОЩ</span>
+                        </a>
+                    </li>
+                    <li data-toggle="modal" data-target="#messageModal" id="chat">
+                        <a >
+                            <img src="assets/images/favouriteIcon.png" alt="">
+                            <br />
+                            <span class='normalWhite'>ONLINE ЧAT</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='#cart'>
+                            <img src="assets/images/cartIcon.png" alt="">
+                            <br />
+                            <span class='normalWhite'>КОЛИЧКА</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <nav id='mainNav'>
+            <div id='categories'>
+                <ul>
+                  <li>
+                        <a id="mainMenu-women" href="#Women">ЖЕНИ</a>
+                    </li>
+                    <li>
+                        <a id="mainMenu-men" href="#Men">МЪЖЕ</a>
+                    </li>
+                    <li>
+                        <a id="mainMenu-brands" href="#brands">МАРКИ</a>
+                    </li> 
+                </ul>
+            </div>
+            <div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+    </main>
+
+    <footer>
+        <div>
+            <h3>ИНФОРМАЦИЯ &amp; УСЛОВИЯ</h3>
+            <ul>
+                <li>
+                    <a href="#help">Често задавани въпроси</a>
+                </li>
+                <li>
+                    <a href="#condition">Условия за връщане</a>
+                </li>
+                <li>
+                    <a href="#generalCondition">Общи условия</a>
+                </li>
+                <li>
+                    <a href="#forUs">За нас</a>
+                </li>
+                <li>
+                    <a href="#contact">Контакти</a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div>
+            <h3>ОБСЛУЖВАНЕ НА КЛИЕНТИ</h3>
+            <ul>
+                <li>
+                    0700 17 660 (на цената на един
+                    <br/> градски разговор)
+                </li>
+                <li>
+                    07:30 - 22:00 ч. в делнични дни
+                </li>
+                <li>
+                    08:00 - 20:00 ч. през почивни дни
+                </li>
+                <li>
+                    <a href="mailto:fashion@fashiondays.bg">Изпратете ни имейл</a>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <h3>МОБИЛНИ ПРИЛОЖЕНИЯ</h3>
+            <ul>
+                <li>
+                    <a href="">iPhone</a>
+                </li>
+                <li>
+                    <a href="">iPad</a>
+                </li>
+                <li>
+                    <a href="">Android</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id='socialMedias'>
+            <h3>СОЦИАЛНИ МЕДИИ</h3>
+            <br/>
+            <a href="https://www.facebook.com/fashiondays.bulgaria">
+                <img src="assets/images/fbIcon.png" alt="">
+            </a>
+            <a href="https://plus.google.com/+fashiondaysbg/posts">
+                <img src="assets/images/gPlus.png" alt="">
+            </a>
+            <a href="https://twitter.com/fashiondaysbg">
+                <img src="assets/images/twitter.png" alt="">
+            </a>
+            <br/>
+            <a href="https://ro.pinterest.com/fashiondaysbg/">
+                <img src="assets/images/pinterest.png" alt="">
+            </a>
+            <a href="https://www.youtube.com/user/FashionDaysBulgaria">
+                <img src="assets/images/youtube.png" alt="">
+            </a>
+            <a href="https://www.instagram.com/fashiondays/">
+                <img src="assets/images/instagram.png" alt="">
+            </a>
+        </div>
+
+        <div id='payInfo'>
+            <div>
+                <h3> &nbsp;МЕТОДИ ЗА ПЛАЩАНЕ</h3>
+                <br/>
+                <img src="assets/images/payment.png" alt="">
+            </div>
+
+            <div>
+                <h3>&nbsp;ДОСТАВКА</h3>
+                <br/>
+                <img src="assets/images/delivery.png" alt="">
+            </div>
+
+            <div>
+                <h4>БЕЗПЛАТНА ДОСТАВКА ЗА ПОРЪЧКИ НАД 89 ЛВ.</h4>
+                <br/>
+                <h4>БЕЗПЛАТНО ВРЪЩАНЕ: ЗАЯВИ В ПЪРВИТЕ 30 ДНИ</h4>
+                <br/>
+                <h4>РАЗНООБРАЗНИ МОДНИ ОФЕРТИ</h4>
+
+            </div>
+
+
+        </div>
+
+        <div>
+            <p>© 2001 - 2018 Данте Интернешънъл СА</p>
+        </div>
+
+
+    </footer>
+
+
+    <script id='loginTemplate' type='text/template'>
+        <div id='buttons'>
+            <button id='loginButton'>ВХОД</button>
+            <button id='regButton'>РЕГИСТРИРАЙ СЕ</button>
+        </div>
+        <div id='loginDiv'>
+        <form action="">
+            <input id='user' type="text" placeholder="Потребителско име" />
+            <br/>
+            <input id='pass'  type="password" placeholder="Парола" />
+            <br/>
+            <button id="logIn">ВХОД</button>
+        </form>
+         </div>
+        <div id='registerDiv'>
+        <form action="">
+            <input id='regUser' type="text" placeholder="Потребителско име" />
+            <br/>
+            <input id='regPass'  type="password" placeholder="Парола" />
+            <br/>
+            <div id='conditions'>
+            <input type="checkbox" id='conditionCheckbox'checked>Съгласен съм с <a href='#generalCondition'>Общите условия</a> на Fashion Days.
+            </div>
+            <br/>
+            <button id="register">РЕГИСТРИРАЙ СЕ</button>
+        </form>
+        </div>
+    </script>
+
+
+    <div id='faq'>
+        <div id='helpOptions'>
+            <a href="#help">
+                <button id="faqButton">ЧЕСТО ЗАДАВАНИ ВЪПРОСИ</button>
+            </a>
+            <a href="#forUs">
+                <button>ЗА НАС</button>
+            </a>
+            <a href="#contact">
+                <button>ЗА КОНТАКТ</button>
+            </a>
+            <a href="#condition">
+                <button>УСЛОВИЯ ЗА ВРЪЩАНЕ</button>
+            </a>
+            <a href="#generalCondition">
+                <button>ОБЩИ УСЛОВИЯ</button>
+            </a>
+        </div>
+
+        <section id='faqSection'>
+
+            <dl>
+                <h1 style="color:#9d0052; font-weight:bold; font-size:1.5em">КОИ СА ЧЕСТО ЗАДАВАНИТЕ ВЪПРОСИ?</h1>
+                <br />
+                <dt>
+                    <span>&#9656;</span> Какво е селекция?</dt>
+                <dd>Fashion Days предлага колекции от модни и лайфстайл продукти, групирани в селекции. Всяка селекция може да
+                    съдържа продукти на една марка или дизайнер, но е възможно също така да обединява тематично продукти
+                    на различни брандове.
+                </dd>
+                <dt>
+                    <span>&#9656;</span> Мога ли да закупя цялата наличност на даден продукт?</dt>
+                <dd>Всеки потребител на Fashion Days има възможност да закупи максимално 5 броя от един артикул. Желанието ни
+                    е повече от нашите потребители да се възползват от селекциите на Fashion Days. Благодарим ви за разбирането!</dd>
+                <dt>
+                    <span>&#9656;</span> Задължително ли е да имам регистрация, за да направя поръчка?</dt>
+                <dd>Пазаруването като гост на сайта за момента не е възможно. Регистрацията на www.fashiondays.bg е лесна и ви
+                    носи достъп до всички наши промоции и функционалности на сайта.</dd>
+                <dt>
+                    <span>&#9656;</span> Мога ли да върна поръчаните продукти?</dt>
+                <dd>Според нашите „Общи условия“, поръчани продукти могат да бъдат върнати в състоянието, в което са били получени
+                    (без следи от употреба, с всички етикети и придружаващи документи), в 30-дневен срок от датата на получаване,
+                    без да давате обяснение и без ограничения до услугите на даден куриер. За да подадете молба за връщане,
+                    е достатъчно да попълните формата за връщане в клиентския си профил във Fashion Days. Ако някой от получените
+                    продукти е повреден или е в гаранция, моля, свържете се с отдел Обслужване на клиенти на телефон 0700
+                    17 660 (на цената на един градски разговор) или имейл fashion@fashiondays.bg.</dd>
+                <dt>
+                    <span>&#9656;</span> Има ли продукти, които не мога да върна?</dt>
+                <dd>Продукти като бельо, козметика, цели бански, както и долната част на бански костюми не подлежат на връщане
+                    поради съображения, свързани с хигиената или защита на здравето. Всеки артикул, неподлежащ на връщане,
+                    съдържа информация за това в описанието си.</dd>
+                <dt>
+                    <span>&#9656;</span> Защитени ли са данните ми, когато пазарувам във Fashion Days?</dt>
+                <dd>Разбира се, напълно безопасно е да пазарувате на страницата на Fashion Days. Цялата информация се съхранява
+                    при изклчително висока сигурност. В допълнение достъпът до профила на всеки клиент е ограничен с уникална
+                    парола. ФД е регистриран в румънския Регистър за обработка на личните данни под № 6606. За повече информация
+                    относно защитата на личните данни, моля, разгледайте Общитe условия, както и секции Сигурност и Поверителност
+                    на нашата страница.</dd>
+                <dt>
+                    <span>&#9656;</span> Сигурно ли е електронното плащане?</dt>
+                <dd>Да, абсолютно. Данните на банковата карта не се запазват в регистър. Връзката между компютъра на потребителя
+                    и PayU също е защитена по най-актуалните стандарти за криптиране.</dd>
+                <dt>
+                    <span>&#9656;</span> Връзката ми с интернет пропадна по време на транзакцията. Какво да направя?</dt>
+                <dd>Моля, проверете наличността във вашата Количка, както и потвърдените си поръчки. Ако поръчката, която сте
+                    се опитали да направите, не е потвърдена, е препоръчително да я направите повторно след възобновяване
+                    на връзката.</dd>
+
+                <dt>
+                    <span>&#9656;</span> Възможно ли е разплащането да бъде осъществено от чуждестранна банка?</dt>
+                <dd>Възможно е разплащане с всички основни банкови карти (VISA, Mastercard и Maestro) независимо от това в коя
+                    държава е банката. Fashion Days не работи единствено с American Express. Възможно е да бъдете таксувани
+                    допълнително, в случай че вашата карта е администрирана от чуждестранна банка.</dd>
+                <dt>
+                    <span>&#9656;</span> Безопасно ли е да използвам банкова карта онлайн?</dt>
+                <dd>Fashion Days и банката не запазват данните на банковата карта. Транзакцията се реализира чрез защитена система,
+                    каквито са и системите за криптиране на PayU.</dd>
+            </dl>
+        </section>
+
+
+        <section id='contactSection'>
+
+            <div class='help'>
+                <h1>Обслужване на клиенти</h1>
+
+                <p> &nbsp;Не се колебайте да се свържете с отдел Обслужване на клиенти на телефонната ни линия. Нашият екип е
+                    на разположение от 07:30 до 22:00 часа в делнични дни и от 08:00 до 20:00 часа през почивни дни. Очакваме
+                    ви.
+                </p>
+
+                <p>
+                    Телефон: 0700 17 660 (на цената на един градски разговор)
+                </p>
+                <p>
+                    Email: fashion@fashiondays.bg Работно време: 07:30 - 22:00 ч. в делнични дни 08:00 - 20:00 ч. през почивни дни
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section id='conditionSection'>
+            <div class='help'>
+                <h1>&nbsp;Връщането е лесно – само следвайте посочените стъпки</h1>
+                <p>Искате да върнете цяла поръчка или само един продукт? Може да го направите лесно в рамките на 30 дни от получаване
+                    на пратката. Следвайте стъпките:</p>
+                <p>&nbsp; 1. Отидете в Профила си и изберете секция Връщане на продукти. Там ще откриете направените от Вас
+                    поръчки, както и тези, които подлежат на връщане. Изберете поръчка, след това – продукт/и, количество
+                    и причина за връщане.
+                </p>
+                <p>
+                    &nbsp; 2. Въведете точен адрес, от който да вземем пратката. Може да изберете адрес, на който вече сме доставяли пратки или
+                    да добавите нов.
+                </p>
+
+                <p>
+                    &nbsp; 3. Изберете метод на плащане. Ако поръчката, която искате да върнете, е платена с кредитна или дебитна карта, сумата
+                    ще бъде върната по сметката, свързана с вашата карта. Ако сте платили чрез друг метод, може да изберете
+                    сумата да бъде върната по банков път в сметка по Ваш избор.
+                </p>
+
+                <p> &nbsp;4. Когато връщането бъде регистрирано, куриер ще дойде в рамките на 2-4 дни, за да вземе пратката с
+                    продуктите за връщане. Моля, предварително подгответе продуктите (може да ги поставите в различна от
+                    оригиналната опаковка). След като предадете пратката на куриера, ще Ви уведомим за статуса на Вашето
+                    връщане чрез имейл и SMS, както следва: - Ще бъдете информирани, когато връщането пристигне в нашия склад.
+                    - Щом проверим статуса на върнатите продукти, ще бъдете информирани дали всички условия за връщане са
+                    изпълнени. - Ще Ви информираме, когато плащането е извършено.
+                </p>
+
+                <p>Важно: всеки формуляр за връщане е асоцииран с една поръчка. Ако желаете да върнете продукти от различни
+                    поръчки, моля, следвайте стъпките по-горе за всяка направена поръчка поотделно и пригответе отделна пратка
+                    за всеки попълнен формуляр за връщане.</p>
+
+            </div>
+
+        </section>
+
+        <section id='forUsSection'>
+            <div class='help'>
+                <h1>Номер 1 онлайн модна дестинация</h1>
+                <p> Ние сме номер 1 онлайн модна дестинация в България, Румъния и Унгария. Предлагаме повече от 500 000 продукта
+                    и впечатляващо разнообразие от марки, достъпни както на онлайн магазина, така и на мобилните ни приложения.
+                    Поръчки над 89лв. включват безплатна доставка и възможност за връщане. Предоставяме огромно разнообразие
+                    от оригинални облекла, обувки и аксесоари на международни марки (Michael Kors, Emporio Armani, Nike,
+                    Adidas, Converse, Desigual, Vero Moda, Guess, Geox и др.) специално за онези, които едновременно ценят
+                    рафинирания вкус, интересуват се от най-актуалните тенденции в модния свят и търсят вдъхновението всекидневно.</p>
+
+
+                <h1>Модни експерти</h1>
+
+                <p>Като експерти в областта на модата ви предизвикваме да експериментирате с визията си и така да преоткриете
+                    личния си и уникален стил. Всеки ден в нашия блог, „The Daily Issue“, както и в каналите ни в социалните
+                    мрежи, може да намерите съвети за стил и красота, предлагани директно от нашите модни специалисти, също
+                    така и информация за най-новите тенденции и новини в модната индустрия.</p>
+
+                <h1>Преоткрий себе си всеки ден!</h1>
+                <p>Стилът се изгражда чрез непрекъснато експериментиране и постоянна трансформация. Може би вчера сте били непокорно
+                    настроени или с шампионски дух, а днес сте артисти или дори звезди. Какъвто и да изберете да бъдете утре,
+                    Fashion Days е тук, за да ви осигури перфектното облекло!</p>
+
+
+                <h1>TIME TO CHANGE</h1>
+
+
+
+            </div>
+
+        </section>
+
+        <section id='generalConditionSection'>
+            <div class='help'>
+
+                <h1>ОБЩИ УСЛОВИЯ ЗА ПОЛЗВАНЕ на fashionays.bg</h1>
+
+                <h3>1. ПРЕДМЕТ </h3>
+                <p>
+                    Настоящият документ представлява едновременно (1) общите условия или условията на ползване на fashiondays.bg и мобилното
+                    приложение Fashion Days, които уреждат правилата за използването на fashiondays.bg и мобилното приложение
+                    Fashion Days, включително сключването на договор за покупко-продажба с търговец от този електронен магазин,
+                    както и (2) споразумението между продавача и клиента за покупко-продажба през сайта fashiondays.bg и
+                    мобилното приложение Fashion Days.
+
+                </p>
+
+                <h3> 2. ДАННИ ЗА ПРОДАВАЧА </h3>
+                <p>2.1. „Данте интернешънъл“ СА (S.C. DANTE INTERNATIONAL S.A.) е дружество със седалище и адрес на управление
+                    в Румъния, Букурещ, шосе „Virtutsii“ № 148, сектор 6, с адрес за кореспонденция Bucharest Nord 15-23
+                    окръг Ilfov в Swan офис парк с рег. № в Търговския регистър на Румъния J40/372/23.01.2002, ЕИК RO14399840
+                    и идентификационен номер по ДДС в България: BG3075208935. </p>
+                <p> 2.2. S.C. DANTE INTERNATIONAL S.A. администрира електронния магазин Fashion Days, под формата на сайта fashiondays.bg,
+                    както и мобилното приложение Fashion Days (наричани за краткост „платформата за електронна търговия Fashon
+                    Days“). S.C. DANTE INTERNATIONAL S.A. щe бъде наричано за краткост по-долу ФД. </p>
+                <p>
+                    2.3. Можете да се свържете с ФД на посочения по-горе адрес, на телефон 0700 17 660 или на имейл адрес fashion@fashiondays.bg.
+                </p>
+
+                <p> 2.4. Продавач на платформата за електронна търговия ФД може да е всяко лице, което предлага стоки или услуги
+                    на трети лица с търговска цел и има сключен съответен договор за това с ФД.</p>
+
+
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <div id='mainDiv'>
+        <section id='mainSection'>
+            <div id='actualSelections'>
+                <h1>АКТУАЛНИ СЕЛЕКЦИИ</h1>
+                <div>
+                    <h2>ЖЕНИ</h2>
+                </div>
+                <div>
+                    <h2>МЪЖЕ</h2>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id='profileDiv'>
+        <section id='profileSection'>
+            <aside>
+                <ul>
+                    <li>
+                        <a href="#settings">НАСТРОЙКИ</a>
+                    </li>
+                    <li>
+                        <a href="#orders">ПОРЪЧКИ</a>
+                    </li>
+                    <li>
+                        <a href="#adresses">АДРЕСИ</a>
+                    </li>
+
+                    <li>
+                        <a href="#logout">ИЗХОД</a>
+                    </li>
+                </ul>
+
+            </aside>
+
+            <section>
+
+            </section>
+
+            <article id='settingsArticle'>
+                <div>
+                    <h1>Общи настройки</h1>
+                    <form action="">
+
+                        <label>Име *</label>
+                        <input type="text" id='firstName'>
+                        <label>Фамилия *</label>
+                        <input type="text" id='surname'>
+                        <br/>
+                        <br/>
+                        <label>Потребителско име *</label>
+                        <input type="text" id='username'>
+                        <br/>
+                        <br/>
+                        <label>Пол: </label>
+
+                        <input type="radio" name='gender' id='gender' value='f' checked> Жена
+                        <input type="radio" name='gender' value='m'> Мъж
+                        <br/>
+                        <br/>
+                        <input type="submit" id='savePersonalInfo' value="Запази">
+                    </form>
+                </div>
+                <div>
+                    <h1>Смяна на парола</h1>
+                    <form action="">
+                        <label>Текуща парола</label>
+                        <input type="password" id='currentPass'>
+                        <label>Нова парола</label>
+                        <input type="password" id='newPass'>
+                        <br/>
+                        <br/>
+                        <label>Потвърди новата парола</label>
+                        <input type="password" id='newPass2'>
+                        <br/>
+                        <br/>
+                        <input type="submit" id='saveNewPass' value="Запази">
+                    </form>
+
+                </div>
+            </article>
+
+
+
+            <script type='text/x-handlebars-template' id='favTemplate'>
+                {{#if favorites}}
+                 <input type="checkbox" id='selectAll'>Избери всички продукти
+                  <button id='deleteAll'>Премахни</button>
+                  <table id='favTable'>
+                      {{#each favorites}}
+                      <tr>
+                          <td>
+                              <input type="checkbox">
+                          </td>
+                          <td class='items'>
+                              <img src="{{image_urls.91x121.0.url}}" width="91">
+                          </td>
+                          <td>
+                          <span class='productTitle'>{{name}}</span>
+                          <br/>
+                          <span>{{brand}}</span>
+                          <br/>
+                          <span>Ограничено количество</span>
+                          <br/>
+                          <span>{{skus.0.sale_price}}</span>
+                          </td>
+                          <td>
+                              <button class='addInCart'>Добави в количката</button>
+                              <button class='deleteItem'>Премахни</button>
+                          </td>
+                      </tr>
+                      {{/each}}
+                  </table>
+                 {{/if}}
+                 {{#unless favorites}}
+                 <p style="font-size:25px; position:relative; top:30px; left:100px">Списъкът с продукти е празен!</p>
+                 <button style="float:right; position:relative; top:0px"onclick="(function(){location.replace('#home')})();">Разгледайте нашите продукти</button>
+                 {{/unless}}
+                  </script>
+
+
+
+
+                  <script type='text/x-handlebars-template' id='ordersTemplate'>
+                    {{#if orders}}
+                      <table id='ordTable'>
+                          <tr>
+                              <th colspan=2>Продукт</th>
+                              <th>Количество</th>
+                              <th>Общо цена</th>
+                          </tr>
+                          {{#each orders as |o|}}
+                          {{#each o}}   
+                          <tr>
+                              <td class='items'>
+                                  <img src="{{product.image_urls.91x121.0.url}}" width="91">
+                              </td>
+                              <td>
+                              <span>{{product.name}}</span>
+                              <br/>
+                              <span>{{product.brand}}</span>
+                              <br/>
+                              <span>{{product.skus.0.sale_price}}</span>
+                              </td>
+                              <td>{{quantity}}</td>
+                              <td>{{cartItemTotal}}</td>
+                            </tr>
+                          {{/each}}
+                          {{/each}}
+                      </table>
+                     {{/if}}
+                     {{#unless orders}}
+                     <p style="font-size:25px; position:relative; top:30px; left:100px">Все още нямате поръчки!</p>
+                     <button style="float:right; position:relative; top:0px"onclick="(function(){location.replace('#home')})();"> Започнете с пазаруването!</button>
+                     {{/unless}}
+                      </script>
+
+
+            <script type='text/template' id='adressessTemplate'>
+                <div id='Address'>
+                    <h1>АДРЕСИ<h1>
+                        <table>
+                            <tr>
+                                <th>Име</th>
+                                <th>Телефонен номер</th>
+                                <th>Град</th>
+                                <th>Пощенски адрес</th>
+                                <th>Улица</th>
+                                <th colspan="2"></th>
+                            </tr>
+                            {{#each address}}
+                            <tr>
+                                <td>{{fullName}}</td>
+                                <td>{{phoneNumber}}</td>
+                                <td>{{city}}</td>
+                                <td>{{postcode}}</td>
+                                <td>{{streetAddress}}</td>
+                                <td><button class='editAddress'>Редактирай</button><button class='saveAddress'>Запази</button></td>
+                                <td><button class='deleteAddress'>Изтрий</button></td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                        <button id='addAddress'>ДОБАВИ АДРЕС</button>
+                    </div>
+        </script>
+
+            <script type='text/template' id='cardsTemplate'>
+                <div id='Card'>
+                        <h1>КАРТИ<h1>
+                        <table>
+                                <tr>
+                                    <th>Име</th>
+                                    <th>Номер на карта</th>
+                                    <th>Валидна до</th>
+                                    <th colspan="2"></th>
+                                    </tr>
+                            {{#each cards}}
+                            <tr>
+                                <td>{{nameOnCard}}</td>
+                                <td>{{cardNumber}}</td>
+                                <td>{{expirationDate}}</td>
+                                <td><button class='editCard'>Редактирай</button> <button class='saveCard'>Запази</button></td>
+                                <td><button class='deleteCard'>Изтрий</button></td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                        <button id='addCard'>ДОБАВИ КАРТА</button>
+                    </div>
+             </script>
+        </section>
+    </div>
+
+
+
+
+    <div id='filterTemplate'>
+        <div>
+            <form action="" id='filters'>
+                <h1>ФИЛТРИ</h1>
+
+                <h2>КАТЕГОРИИ</h2>
+                <h3>ОБУВКИ</h3>
+                <br/>
+                <input type="checkbox" value='shoe' class="filters" name="categoryFilter">Класически обувки
+                <br/>
+                <input type="checkbox" value='boots' class="filters" name="categoryFilter">Ботуши
+                <br/>
+                <input type="checkbox" value='sneakers' class="filters" name="categoryFilter">Спортни обувки
+                <br/>
+                <br/>
+
+                <h3>ДРЕХИ</h3>
+                <br/>
+                <input type="checkbox" value='tops' class="filters" name="categoryFilter">Блузи
+                <br/>
+                <input type="checkbox" value='jeans' class="filters" name="categoryFilter">Дънки
+                <br/>
+                <input type="checkbox" value='pants' class="filters" name="categoryFilter">Панталони
+                <br/>
+                <input type="checkbox" value='jackets' class="filters" name="categoryFilter">Якета
+                <br/>
+                <input type="checkbox" value='shirts' class="filters" name="categoryFilter">Ризи
+                <br/>
+                <input type="checkbox" value='tshirt' class="filters" name="categoryFilter">Тениски
+                <br/>
+                <input type="checkbox" value='coat' class="filters" name="categoryFilter">Палта
+                <br />
+                <br/>
+
+                <h3>АКСЕСОАРИ</h3>
+                <br/>
+                <input type="checkbox" value='belt' class="filters" name="categoryFilter">Колани
+                <br/>
+                <input type="checkbox" value='watch' class="filters" name="categoryFilter">Часовници
+                <br/>
+                <input type="checkbox" value='scarf' class="filters" name="categoryFilter">Шалове
+                <br/>
+                <input type="checkbox" value='sunglass' class="filters" name="categoryFilter">Слънчеви очила
+                <br/>
+                <br/>
+
+                <h3>ЧАНТИ</h3>
+                <br/>
+                <input type="checkbox" value='backpack' class="filters" name="categoryFilter">Раници
+                <br/>
+                <input type="checkbox" value='bag' class="filters" name="categoryFilter">Чанти
+                <br />
+                <br/>
+
+                <h3>МАРКИ</h3>
+                <br/>
+                <input type="checkbox" value='next' class="filters" name="brandFilter">NEXT
+                <br/>
+                <input type="checkbox" value='ralph lauren' class="filters" name="brandFilter">Ralph Lauren
+                <br/>
+
+                <input type="checkbox" value='puma' class="filters" name="brandFilter">Puma
+                <br/>
+
+                <input type="checkbox" value='hugo boss' class="filters" name="brandFilter">HUGO BOSS
+                <br/>
+
+                <input type="checkbox" value='derek lam 10 crosby' class="filters" name="brandFilter">Derek Lam 10 Crosby
+                <br/>
+                <br/>
+            </form>
+        </div>
+
+        <div id='productSelections'></div>
+
+    </div>
+
+    <script type='text/template' id='itemsTemplate'>
+        <table>
+                {{#each items}}
+                <tr>
+                    <td class='items'>
+                       <img src="{{[4]}}" width="250px">
+                        <span>{{[0]}}</span> <br/>
+                        <span>{{[1]}} лв.</span>
+                        
+                    </td>
+                </tr>
+                {{/each}}
+
+            </table>
+    </script>
+
+
+
+    <script type='text/x-handlebars-template' id='itemTemplate'>
+
+        <div id='singleItem'>
+                <div id='minImgs'>
+                    {{#each image_urls.300x400 as |s|}}
+                    <img src="{{s.url}}" height="150px" /> {{/each}}
+                </div>
+
+                <div id='bigImg'>
+                    <img src="{{[0].image}}" alt="">
+                </div>
+
+
+                <div id='info'>
+                    <h2>Налични {{[0].count_available}}</h2>
+                    <p id='itemTitle'>{{[0].product_name}}</p>
+                    <h1>{{[0].product_price}} лв.</h1>
+                    <p class='bold'>Изберете количество:
+                        <input class="bold" id="productQuantity" type="number" name="quantity" min="1" max="10" value="1">
+                    </p>
+                    <!--<p>Количество: <input id='quantity' type='text' size='4'/></p>-->
+
+                    <p class='bold'>ДОСТАВКА ДО 2-4 РАБОТНИ ДНИ</p>
+                    <button id='addToCart'>Добави в количката</button>
+                    <button id='addFav' style="display:none">&#x2661;</button>
+        
+                    <p class='bold'>30 ДНИ СРОК ЗА БЕЗПЛАТНО ВРЪЩАНЕ</p>
+                    <p class='bold'>ПРОВЕРКА НА ПРАТКАТА</p>
+                </div>
+                <div id='desc'>
+                    <button class='description'>ОПИСАНИЕ</button>
+
+                    <button class='payment'>ДОСТАВКА И ПЛАЩАНЕ</button>
+
+                    <button class='return'>ВРЪЩАНЕ</button>
+                    <div id='containter'></div>
+
+                    <div class='hidden description'>
+                        {{[0].description}}
+                    </div>
+                    <div class='hidden payment'>Доставка Поръчките доставяме чрез една от куриерските фирми (Европът, Еконт, Рапидо). Доставка до адрес: За поръчки
+                        над 89 лв. доставката е БЕЗПЛАТНА. За поръчки под 89 лв. таксата за доставка е 4 лв. Доставка до офис на
+                        Еконт: Ще изпратим пратката до най-близкия до вас офис на Еконт. Доставката е БЕЗПЛАТНА за поръчки над 65
+                        лв. За поръчки под 65 лв. таксата за доставка е 4 лв. Плащане Кредитна/дебитна карта – приемаме всички валидни
+                        банкови карти на MasterCard, Visa или Maestro (и American Express, в случай че е приложимо в съответната
+                        страна). Наложен платеж – плащането се извършва на куриера при доставката на продукта.
+                    </div>
+                    <div class='hidden return'> Искате да върнете цяла поръчка или само един продукт? Може да го направите лесно и безплатно в рамките на 30
+                        дни от получаване на пратката. За целта: Отидете в Профила си, изберете секция Връщане на продукти и следвайте
+                        указанията във формуляра за връщане. Всички връщания в секция Връщане на продукти в Моят профил, направени
+                        чрез попълване на Формуляра за връщане, са БЕЗПЛАТНИ и се осъществяват чрез нашите партньорски куриерски
+                        фирми. Вие избирате как да получите заплатената сума за върнатия продукт. В зависимост от метода на плащане,
+                        това може да стане по банков път (по ваша сметка или по сметката на вашата кредитна/дебитна карта) или чрез
+                        зареждане на ваучер за следваща покупка. Ако възникнат допълнителни въпроси, свържете се с нас на телефон
+                        0700 17 660 (на цената на един градски разговор).
+                    </div>
+
+                </div>
+
+            </div>
+
+    </script>
+
+
+    <script type='text/x-handlebars-template' id='cartTemplate'>
+        <section id="cartSection">
+            <table id='cartTable'>
+                <caption>Вашата количка</caption>
+                <thead>
+                    <tr>
+                        <th>Налични</th>
+                        <th colspan="2"></th>
+                        <th>Премахни</th>
+                        <th>Цена за артикул</th>
+                        <th>Количество</th>
+                        <th>Цена общо</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each item}}
+                    <tr id="{{id}}">
+                            <td class='items'>
+                                    <span class="items">{{product.[0].count_available}}</span>
+                                </td>
+                        <td class='items'>
+                            <img src="{{product.[0].image}}" width="91">
+                        </td>
+                        <td>
+                            <span class="items">{{product.[0].product_name}}</span>
+                            <br/>
+                            
+                        </td>
+                        <td>
+                            <button class='deleteItem'>Премахни</button>
+                        </td>
+                        <td>
+                            <span>{{product.[0].product_price}} лв</span>
+                        </td>
+                        <td>
+                            <input class="changeQuantity" type="number" min="1" value="{{quantity}}"/>
+                        </td>
+                        <td>
+                            <span>{{cartItemTotal}} лв.</span>
+                        </td>
+                    </tr>
+                    {{/each}}
+                    <tr>
+                        <td>Общо</td>
+                        <td colspan="4"></td>
+                        <td id="totalCost"> лв.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="purchaseBut">Закупи</button>
+        </section>
+    </script>
+
+<!-- message modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+         
+          <h1 class="modal-title" class="retweet-modal-label">Dirrect messages</h1>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <section>
+          <div id="change_username">
+                <input id="usrnme" type="text" />
+                <button id="send_username" type="button">Change username</button>
+          </div>
+        </section>
+
+        <section id="videostream" style="background: grey;"> 
+            <div>
+                <video id="localVideo" autoplay></video>
+                <script src="js/videoscript.js"></script>
+            </div>
+        </section>
+
+        <section id="chatroom">
+          <section id="feedback"></section>
+        </section>
+
+        <section id="input_zone"> 
+          <input id="mssг" class="vertical-align" type="text" />
+          <button id="send_message" class="vertical-align" type="button">Send</button>
+        </section>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    sendRequest('allproducts', 'GET', {}, function showResponse(response){
+
+    var source = $('#searchTemplate').html();
+    var template = Handlebars.compile(source);
+
+    var searchHTML = template({product: response});
+    $('#productList').html(searchHTML);
+
+    $('#searchByTitle').on('click', function () {
+        event.preventDefault();
+        
+        var title = $('#searchItem').val();
+        console.log(title);
+        data = {'product_name': title}
+                    console.log(title);
+                    sendRequest('product', 'GET', data , function showResponse(response){
+                       console.log(response);
+                     
+                       location.replace('#item='+response);
+                        console.log(response[0].count_available);
+                        
+                        
+                       var itemTemplate = $('#itemTemplate').text();
+                       var itemPage = Handlebars.compile(itemTemplate);
+                       $('main').html(itemPage(response));
+                        
+                       $('#containter').html($('div.description').text());
+                   
+                       $('#desc button').on('click', function(){
+                               event.preventDefault();
+                   
+                               var buttonClass=$(this).attr('class');
+                               $('#containter').html($('div.'+buttonClass).text());
+                       })
+
+
+                       $('#addToCart').on('click', function (event) {
+                            
+                        event.preventDefault();
+                        console.log(response);
+                        var quantity = parseInt($('#productQuantity').val());
+                        console.log(quantity);
+                        if (sessionStorage.getItem('loggedUser') != null) {
+                            var user = JSON.parse(sessionStorage.getItem('loggedUser'));
+                            console.log(user);
+             
+                            cartStorage.addCartItem(response, quantity);
+                        } else {
+                            alert('Трябва да се логнете, за да добавите продукт в кошницата!');
+                            location.replace('#loginRegister');
+                        }
+                    });
+
+                    
+                    })
+        $('#searchItem').val('');
+    })});
+    </script>
+
+</body>
+
+</html>

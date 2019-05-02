@@ -1,0 +1,552 @@
+.modal-header h1{
+    line-height: 1.5;
+    width:100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.retweet-input>input{
+    width: 70%;
+    margin: 1em 1.5em;
+    height: 37px;
+    background-color: #e8f5fd;
+    border: none;
+    padding: 0em 2em;
+    border-radius: 10px;
+    font-size: 13px;
+    border: 0.5px solid #1da1f2;
+}
+
+#retweetModal, #replyModal, #messageModal{
+    z-index: 1100 !important;
+}
+
+
+#likesModal{
+    z-index:1200 !important;
+}
+
+#postModal .posts-action-list, .all-conversations div{
+    display: inline-block;
+}
+
+.modal .posts-action-list, .modal .post-section span, .modal .postSection button{
+    display:none;
+}
+
+.modal .postSection{
+    margin-top: 2em;
+}
+.modal .replyButton{
+    float: right;
+    margin: -4.5em 1.7em;
+}
+
+.modal-open {
+    overflow: hidden;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    outline: 0;
+  }
+  
+  .modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  .modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 0.5rem;
+    pointer-events: none;
+  }
+  
+  .modal.fade .modal-dialog {
+    transition: -webkit-transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+    -webkit-transform: translate(0, -25%);
+    transform: translate(0, -25%);
+  }
+  
+  @media screen and (prefers-reduced-motion: reduce) {
+    .modal.fade .modal-dialog {
+      transition: none;
+    }
+  }
+  
+  .modal.show .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+  
+  .modal-dialog-centered {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: calc(100% - (0.5rem * 2));
+  }
+  
+  .modal-content {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+    margin: 3.5em 0.8em;
+  }
+  
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000;
+  }
+  
+  .modal-backdrop.fade {
+    opacity: 0;
+  }
+  
+  .modal-backdrop.show {
+    opacity: 0.5;
+  }
+  
+  .modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+  }
+  
+  .modal-header .close {
+    padding: 1rem;
+    margin: -1rem -1rem -1rem auto;
+  }
+  
+  .modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+  }
+  
+  .modal-body {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1rem;
+  }
+  
+  .modal-footer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding: 1rem;
+    border-top: 1px solid #e9ecef;
+    margin:2em 0em 1em 0em;
+  }
+  
+  .modal-footer > :not(:first-child) {
+    margin-left: .25rem;
+  }
+  
+  .modal-footer > :not(:last-child) {
+    margin-right: .25rem;
+  }
+  
+  .modal-scrollbar-measure {
+    position: absolute;
+    top: -9999px;
+    width: 50px;
+    height: 50px;
+    overflow: scroll;
+  }
+
+
+.close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+  }
+  
+  .close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    opacity: .75;
+  }
+  
+  .close:not(:disabled):not(.disabled) {
+    cursor: pointer;
+  }
+  
+  button.close {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+  }
+
+  @media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 565px;
+        margin: auto;
+    }
+    .image-modal-dialog{
+      height: 100% !important;
+      max-width: 80%;
+      height: auto;
+      display: block;
+      text-align: center;
+      padding-top: 5%;
+    }
+    .modal-dialog-centered {
+      min-height: calc(100% - (1.75rem * 2));
+    }
+    .modal-sm {
+      max-width: 300px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .modal-lg {
+      max-width: 800px;
+    }
+  }
+
+
+  .modal-spans,  .modal-spans>span{
+    margin: 1em;
+  }
+
+  .modal-spans>span>span{
+    font-weight:bold;
+    color:black;
+  }
+
+  .modal-spans>span{
+      cursor: pointer;
+    color: gray;
+    margin: 1em;
+    line-height: 2em;
+  }
+
+  #messageModal .modal-content{
+    margin: 9% -10%;
+    width: 113%;
+    height: 100%;
+  }
+
+  #messageModal button:first-of-type{
+    width: 34%;
+    height: 31px;
+    position: relative;
+  
+    top: -2px;
+  }
+
+  #messageModal h1{
+    text-align: left;
+  }
+
+  #messageModal .modal-body h1{
+    font-size: 1.7em;
+    font-weight: bold;
+  }
+
+  /* #messageModal p{
+    margin: 1em 0em 2em 0em;
+    color: gray;
+  } */
+
+  #messageModal .modal-body, .start-conversation{
+    margin: 1% 6% 0% 6%;
+  }
+
+  #messageModal .start-conversation input{
+    width: 97%;
+    height: 35px;
+    border-radius: 10px;
+    margin: 1em 0em;
+    border: 1px solid #1da1f2;
+    font-size: 1em;
+    padding: 1em;
+  }
+
+  .start-conversation li div{
+  display: inline-block;
+  position: relative;
+  top: -16px;
+}
+
+.all-conversations div:first-of-type{
+  position: relative;
+  top: -7px;
+}
+#messageModal .start-conversation li {
+  border:none;
+}
+
+.start-conversation li img{
+  height: 38px;
+  width: 41px;
+  object-fit: cover;
+
+}
+
+  #messageModal h2{
+    font-weight: bold;
+    margin-top:2em;
+  }
+
+  .send-message-div input{
+    width: 80%;
+    margin: 1em;
+    height: 31px;
+    border-radius: 10px;
+    border: 1px solid #1da1f2;
+    padding: 0em 1em;
+    
+  }
+
+  .send-message-div{
+    height: 11%;
+    background-color: #e8f5fd;
+    margin-bottom: 1em;
+  }
+
+  .send-message-div button{
+    width: 11% !important;
+  }
+
+  .message-window{
+    height: 84%;
+  }
+
+  .message-container, .all-conversations, .start-conversation{
+    height: 91%;
+    overflow: auto;
+  }
+  #messageModal  img{
+    height: 53px;
+    width: 55px;
+    border-radius: 100px;
+    object-fit: cover;
+  }
+
+  #messageModal .all-conversations li{
+    padding:1em 2em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+
+  #messageModal span:first-of-type{
+    color:black;
+    padding-left:1em;
+  }
+  #messageModal span:last-of-type{
+    color:gray;
+    padding:0em 1em;
+    position: relative;
+    top: -196px;
+
+  }
+
+  #messageModal .modal-dialog{
+    height: 85%;
+  }
+
+  #messageModal .start-conversation a{
+    display: block;
+    height: 100%;
+  }
+
+  #messageModal li:hover{
+    background-color: #f5f8fa;
+  }
+
+  #messageModal .message-container p {
+    font-size: 1em;
+  }
+  #messageModal .message-container img{
+    height: 26px;
+    width: 27px;
+    object-fit: cover;
+  }
+  .message-window p{
+    display: inline-block;
+    border-radius: 10px;
+    padding: 0.2em 1em 0.2em 0.5em;
+    font-size: 1.4em;
+  }
+
+  .userInSession-messages p{
+    float: right;
+    background-color: #1da1f2;
+    color: white;
+  }
+
+
+  .userInSession-messages img{
+    float:right;
+  }
+  /* PICTURE DETAIL MODAL  */
+  .image-modal-container{
+    display: inline-block;
+    position: relative;
+    flex-direction: unset !important;
+    background-color: unset;
+    width: auto;
+    height: 100%;
+    margin: 0;
+    /* text-align: center; */
+    border: none;
+  }
+
+  .expanded-image{
+    /* width: 100%;
+    height: 100%; */
+    /* position: relative; */
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  #image-modal{
+    max-height: 90% !important;
+    overflow-y: hidden;
+  }
+
+  .delete-image{
+    display: block;
+    width: 30px;
+    position: absolute;
+    left: 1.5%;
+    top: 1%;
+    /* float: right; */
+    cursor: pointer;
+  }
+
+  tooltip{
+    position: unset !important
+  }
+
+.message-container ul{
+  height: 100%;}
+
+  .message-container ul li, .myMessage, .myMessage div{
+    width: 100%; 
+    
+  }
+  .myMessage div>div{
+    text-align: right;
+    border-radius: 10px;
+  }
+
+ 
+  .myMessage img{
+    display: none;
+  }
+  
+  .myMessage p{
+    background-color: #74c0ed !important;
+  }
+
+  .message-container p{
+    background-color: #e6ecf0;
+  }
+
+  .modal-content .modal-header #backButton{
+    width: 8%;
+    margin-right: 1em;
+  }
+
+  #backButton:hover{
+    background-color:#1da1f2;
+  }
+.retweetBox{
+    display: none;
+  }
+
+  .blueHeader{
+    text-align: center;
+    font-size: 1.4em;
+    color: #1da1f2;
+  }
+
+
+  .lastMessage{
+    position: relative;
+    left: 15px;
+  }
+
+  .gray{
+    color:gray;
+  }
+
+  .message-container div{
+    padding: 0.1em 1em 0em 0.5em;
+    border-radius: 10px;
+  }
+
+ .all-conversations ul li>div{
+  width: 83%;
+  }
+
+  .all-conversations button{
+    float: right;
+    margin-top: 0.7em;
+    width: 16% !important;
+  }
+
+  .retweet-input>input {
+    width: 94%;}
+
+
+    #replyModal .upload{
+      display: none;
+    }
+
+
+    #postInfoInput{
+      width: 72%;
+    }
+
+    #messageModal input{
+      width: 407px;
+      height: 37px;
+      border-radius: 20px;
+      background: whitesmoke;
+      outline:none;
+    }
