@@ -1,31 +1,25 @@
 import React, { Component } from 'react';
+import NavMenu from './components/NavMenu';
 import './App.css';
 
 
 class App extends Component {
   render() {
+    let links = [
+      { label: 'Home', link: '#home', active: true },
+      { label: 'Log In', link: '#about' },
+      { label: 'Cart', link: '#contact-us' },
+      { label: 'FAQ', link: '#portfolio' },
+      { label: 'Contact Us', link: '#contact-us' },
+    ];
+
     return (
       <div className="App">
         
         <header>
-          <nav id='headerNav'>
-            <a href="#home">
-                <h1 id='title'>
-                    <span class='normalWhite'>FASHION WORLD</span>
-                </h1>
-            </a>
-            <div id='search'>
-                <input type="text" list="productList" placeholder="Търси в уебсайта..." 
-                  id='searchItem' maxlength='30' name='searchItem'/>
-                <datalist id="productList">
-                </datalist>
-                <button id='searchByTitle'>
-                    <span>&#8981;</span>
-                </button>
-            </div>
-          </nav>
-        </header>
-      </div>
+            <NavMenu links={links}  />
+         </header>
+       </div>
     );
   }
 }
