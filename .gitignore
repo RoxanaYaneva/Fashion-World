@@ -1,14 +1,12 @@
 
 # dependencies
-/node_modules
-
-# testing
-/coverage
+node_modules/
 
 # production
-/build
+.vscode/
 
 # misc
+.directory
 .DS_Store
 .env.local
 .env.development.local
