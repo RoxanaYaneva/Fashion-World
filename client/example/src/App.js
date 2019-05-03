@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Greeting from './components/Greeting';
-import logo from './logo.svg';
 import './App.css';
 
 
@@ -8,20 +6,24 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <Greeting />
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+        
+        <header>
+          <nav id='headerNav'>
+            <a href="#home">
+                <h1 id='title'>
+                    <span class='normalWhite'>FASHION WORLD</span>
+                </h1>
+            </a>
+            <div id='search'>
+                <input type="text" list="productList" placeholder="Търси в уебсайта..." 
+                  id='searchItem' maxlength='30' name='searchItem'/>
+                <datalist id="productList">
+                </datalist>
+                <button id='searchByTitle'>
+                    <span>&#8981;</span>
+                </button>
+            </div>
+          </nav>
         </header>
       </div>
     );
