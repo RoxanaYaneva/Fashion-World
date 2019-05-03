@@ -26,6 +26,15 @@ class NavMenu extends Component {
                     FASHION WORLD
                 </h1>
 
+                <div id='search'>
+                    <input type="text" list="productList" placeholder="Search..." id='searchItem'
+                        maxlength='30' name='searchItem'/>
+                    <datalist id="productList"></datalist>
+                    <button id='searchButton'>
+                        <span>&#8981;</span>
+                    </button>
+                </div>
+
                 <ul className="menu__list">
                     {linksMarkup}
                 </ul>

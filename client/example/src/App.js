@@ -7,10 +7,9 @@ class App extends Component {
   render() {
     let links = [
       { label: 'Home', link: '#home', active: true },
-      { label: 'Log In', link: '#about' },
-      { label: 'Cart', link: '#contact-us' },
-      { label: 'FAQ', link: '#portfolio' },
-      { label: 'Contact Us', link: '#contact-us' },
+      { label: 'Log In', link: '#logIn' },
+      { label: 'Cart', link: '#cart' },
+      { label: 'Help', link: '#help' },
     ];
 
     return (
