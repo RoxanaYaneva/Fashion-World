@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Home from './components/Home';
+import LogIn from './components/Login';
+import Cart from './components/Cart';
+import Help from './components/Help';
 import NavMenu from './components/NavMenu';
-import './App.css';
 
 
 class App extends Component {
   render() {
-    let links = [
-      { label: 'Home', link: '#home', active: true },
-      { label: 'Log In', link: '#logIn' },
-      { label: 'Cart', link: '#cart' },
-      { label: 'Help', link: '#help' },
-    ];
-
     return (
-      <div className="App">
-        
-        <header>
-            <NavMenu links={links}  />
-         </header>
-       </div>
+      <BrowserRouter>
+      <div>
+          <NavMenu />
+          <div>
+            <Route path="/" component={Home} exact />
+            <Route path="/logIn" component={LogIn} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/help" component={Help} />
+          </div>
+        </div>
+      </BrowserRouter>
+
     );
   }
 }

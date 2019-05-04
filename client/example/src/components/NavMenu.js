@@ -1,46 +1,30 @@
-import React, { Component } from 'react';
+import React  from 'react';
+import { NavLink } from 'react-router-dom';
 import './NavMenu.css'
 
+const NavMenu = () => {
+    return (
+        <div className="menu">
+            <h1 id='title' className='normalWhite'>
+                FASHION WORLD
+            </h1>
 
-class NavMenu extends Component {
-
-    render() {
-
-        let linksMarkup = this.props.links.map((link, index) => {
-            let linkMarkup = link.active ? (
-                <a className="menu__link menu__link--active" href={link.link}>{link.label}</a>
-            ) : (
-                <a className="menu__link" href={link.link}>{link.label}</a>
-            );
-
-            return (
-                <li key={index} className="menu__list-item">
-                    {linkMarkup}
-                </li>
-            );
-        });
-
-        return (
-            <nav className="menu">
-                <h1 id='title' class='normalWhite'>
-                    FASHION WORLD
-                </h1>
-
-                <div id='search'>
-                    <input type="text" list="productList" placeholder="Search..." id='searchItem'
-                        maxlength='30' name='searchItem'/>
-                    <datalist id="productList"></datalist>
-                    <button id='searchButton'>
-                        <span>&#8981;</span>
-                    </button>
-                </div>
-
-                <ul className="menu__list">
-                    {linksMarkup}
-                </ul>
-            </nav>
-        );
-    }
+            <div id='search'>
+                <input type="text" list="productList" placeholder="Search..." id='searchItem'
+                name='searchItem'/>
+                <datalist id="productList"></datalist>
+                <button id='searchButton'>
+                    <span>&#8981;</span>
+                </button>
+            </div>
+            <div className="menu__list">
+                <NavLink className="menu__link" to="/" >Home</NavLink>
+                <NavLink className="menu__link" to="/logIn">Log In</NavLink>
+                <NavLink className="menu__link" to="/cart">Cart</NavLink>
+                <NavLink className="menu__link" to="/help">Help</NavLink>
+            </div>
+        </div>
+    );
 }
 
 export default NavMenu;
