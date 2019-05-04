@@ -5,15 +5,18 @@ const db_module = require('mysql');
 const cors = require('cors');
 const util = require('util');
 const sha1 = require('sha1');
+const dotenv = require('dotenv');
+
 const PORT = 8080;
 
 const errors = {NO_ERROR:0,
     DB_ERROR:1,
     SERVER_ERROR:2};
 
+dotenv.config();
 //Database 
 var pool = db_module.createPool({
-    host     : "fashion-db-server",
+    host     : "localhost",
     user     : process.env.DB_USER,
     password : process.env.DB_PASS,
     database : process.env.DB_NAME,
