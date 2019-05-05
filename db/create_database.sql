@@ -17,9 +17,9 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-
+DROP TABLE IF EXISTS `customers`;
 CREATE TABLE `customers` (
-  `customer_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `customer_name` varchar(40) NOT NULL,
   `customer_password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -28,48 +28,60 @@ INSERT INTO `customers` (`customer_id`, `customer_name`, `customer_password`) VA
 (1, 'Maria Cholakova', 'Asdf1');
 
 
-CREATE TABLE `products` (
-  `product_id` int(11) NOT NULL,
-  `product_price` float(5,2) NOT NULL,
+DROP TABLE IF EXISTS `men_products`;
+CREATE TABLE `men_products` (
+  `product_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `product_name` varchar(40) NOT NULL,
-  `count_available` int(11) NOT NULL DEFAULT '30',
-  `product_sex` enum('m','f') DEFAULT NULL,
+  `product_price` float(5,2) NOT NULL,
   `description` varchar(100) NOT NULL,
-  `image` varchar(300) NOT NULL
+  `image` varchar(50) NOT NULL,
+  `count_available` int(11) NOT NULL DEFAULT '10',
+  `rating` float (3, 2) DEFAULT 0,
+  `category` enum('jeans', 'tshirts', 'pullovers') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `women_products`;
+CREATE TABLE `women_products` (
+  `product_id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `product_name` varchar(40) NOT NULL,
+  `product_price` float(5,2) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `image` varchar(50) NOT NULL,
+  `count_available` int(11) NOT NULL DEFAULT '10',
+  `rating` float (3, 2) DEFAULT 0,
+  `category` enum('jeans', 'tshirts', 'dresses') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `products` (`product_id`, `product_price`, `product_name`, `count_available`, `product_sex`, `description`, `image`) VALUES
-(1, 156.99, 'GUESS dress', 2, 'f', 'Such a beautiful dess!', 'https://lumiere-a.akamaihd.net/v1/images/file_be6334f7.jpeg?width=1200&region=0%2C0%2C2000%2C2000&quality=8'),
-(2, 8.99, 'Roberto Cavalli shirt', 3, 'm', 'Men\'s shirt.', 'https://5.imimg.com/data5/WI/EB/MY-45054986/boys-designer-shirts-500x500.jpg'),
-(3, 172.99, 'Red blouse', 4, 'f', 'Red blouse with short sleeves.', 'https://pngimage.net/wp-content/uploads/2018/05/blouse-png-3.png'),
-(4, 34.99, 'Denim jeans', 1, 'f', 'Dolce & Gabbana jeans!', 'https://webiconspng.com/wp-content/uploads/2017/09/Jeans-PNG-Image-44263.png'),
-(5, 52.99, 'Pink jeans', 5, 'f', 'Lovely pink jeans!', 'https://cdn.shopify.com/s/files/1/1110/1732/products/Chet_Rock_Pink_grande.png?v=1490631055'),
-(6, 158.99, 'White blouse', 2, 'f', 'White blouse for every occasion.', 'https://static1.squarespace.com/static/5b26a5ef25bf0296b641458a/t/5bfe29d6352f5323e24c058f/1543383583232/blouse.png'),
-(7, 33.99, 'Glittery dress', 3, 'f', 'Glittery pink dress!', 'https://cdn.shopify.com/s/files/1/2605/6882/products/product-image-442076407_530x@2x.jpg?v=1521459033'),
-(8, 91.99, 'Stylish jeans', 3, 'm', 'Men\'s jeans.', 'https://vignette.wikia.nocookie.net/play-rust/images/3/3f/Pants_icon.png/revision/latest?cb=20150821195647'),
-(9, 153.99, 'Adidas jacket', 1, 'f', 'Addidas sports jacket!', 'http://jordelsport.com/userfiles/productimages/product_5111.jpg'),
-(10, 90.99, 'Black coat', 3, 'f', 'Winter coat which will keep you warm.', 'https://thehipsterhive.com/wp-content/uploads/2018/09/7687-2a535e-600x600.jpg'),
-(11, 193.99, 'Hello Kitty shirt', 2, 'f', 'Hello Kitty T-Shirt!', 'https://www.symbios.pk/image/cache/data/h/Hello%20Kitty%20White%20Women%20T-Shirt-500x500.JPG'),
-(12, 91.99, 'Dalas review shirt', 3, 'm', 'Men\'s T-Shirt.', 'https://www.pngarts.com/files/3/T-Shirt-PNG-Image-Background.png'),
-(13, 75.99, 'Leather jacket', 4, 'm', 'Men\'s leather jacket.', 'https://4.imimg.com/data4/VW/KT/MY-17715579/mens-leather-jacket-500x500.jpg'),
-(14, 104.99, 'Blue skirt', 1, 'f', 'Women\'s skirt in blue.', 'http://www.eyesofthewildtattoostudio.com/image/cache/data/category_3/max-and-co-women-calamaio-skirt-an-essential-item-in-the-closet-ma646aa96eyp-ouvhovf-4028-500x500.jpg'),
-(15, 91.99, 'Everyday jeans', 5, 'm', 'Men\'s jeans in black.', 'https://media.dcshoes-newzealand.co.nz/media/catalog/product/cache/thumbnail/500x500/9df78eab33525d08d6e5fb8d27136e95/e/d/edydp03383_dc_mens_worker_slim_denim_jeans_kvjw_1_h.jpg');
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE `comments` (
+  `comment_id` int(11) NOT NULL,
+  `product_name` varchar(40) NOT NULL,
+  `username` varchar(40) NOT NULL,
+  `date_posted` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-ALTER TABLE `customers`
-  ADD PRIMARY KEY (`customer_id`);
+INSERT INTO men_products (product_name, product_price, description, image, count_available, category) VALUES
+('Stylish jeans', 145.99, 'Men jeans.', 'men_style_jeans.jpg', 5, 'jeans'),
+('Elegant blue jeans', 162.99,  'The elegant men choice.', 'men_blue_jeans.webp', 4, 'jeans'),
+('Ripped jeans', 136.99, 'Cool ripped jeans for men.', 'men_ripped_jeans.jpg', 6, 'jeans'),
+('Dream pullover', 102.99, 'Warm pullover.', 'dream_pullover.jpg', 5, 'pullovers'),
+('Grey pullover', 75.99, 'Casual grey pullover.', 'grey_pullover.jpg', 5, 'pullovers'),
+('Black pullover', 67.99, 'Casual black pullover.', 'black_pullover.jpg', 3, 'pullovers'),
+('Armani Tshirt', 130.99, 'Made to impress...', 'men_armani_shirt.jpg', 5, 'tshirts'),
+('Blue Tshirt', 121.99, 'Casual Tshirt.', 'men_blue_shirt.jpg', 4, 'tshirts'),
+('Sports Tshirt', 80.99, 'Keep the good shape and looks.', 'men_grey_shirt.jpg', 5, 'tshirts');
 
+INSERT INTO women_products (product_name, product_price, description, image, count_available, category) VALUES
+('Indigo jeans', 112.99, 'The perfect choice.', 'women_indigo_jeans.jpg', 5, 'jeans'),
+('Grey jeans with decorations', 172.99,  'Look beautiful.', 'women_grey_jeans.jpg', 3, 'jeans'),
+('Cool ripped jeans', 157.99, 'Cool ripped jeans for women.', 'women_ripped_jeans.jpg', 2, 'jeans'),
+('Red Tshirt', 94.99, 'Everyday Tshirt.', 'women_red_shirt.jpg', 5, 'tshirts'),
+('White Tshirt', 109.99, 'Casual white Tshirt.', 'women_white_shirt.jpg', 3, 'tshirts'),
+('Blue Tshirt', 121.99, 'Casual blue Tshirt.', 'women_blue_shirt.jpg', 4, 'tshirts'),
+('Pink dress', 180.99, 'Official pink dress.', 'pink_dress.jpg', 5, 'dresses'),
+('Yellow dress', 120.99, 'Everyday dress.', 'yellow_dress.jpg', 2, 'dresses'),
+('Elegant dress in two parts', 190.99, 'Draw all the attention with this dress.', 'white_pink_dress.jpg', 5, 'dresses');
 
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`product_id`),
-  ADD UNIQUE KEY `product_name` (`product_name`);
-
-ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
-
-ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
