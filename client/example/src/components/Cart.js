@@ -6,7 +6,8 @@ class Cart extends Component {
     render() {
         return (
             <div className="main">
-                <h1>Cart</h1>
+                <h1 class="center">Вашата количка е празна</h1>
+                <a href="/" class="btn btn-primary">Разгледайте нашите продукти</a>
             </div>
         );
     }
