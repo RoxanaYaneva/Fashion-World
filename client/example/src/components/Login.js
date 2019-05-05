@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import "./Main.css"
 
 class LogIn extends Component {
 
     render() {
         return (
-            <h1>Log in</h1>
+            <div className="main">
+                <h1>LogIn</h1>
+            </div>
         );
     }
 }

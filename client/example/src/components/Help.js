@@ -1,11 +1,14 @@
 
 import React, { Component } from 'react';
+import "./Main.css";
 
 class Help extends Component {
 
     render() {
         return (
-            <p>Help</p>
+            <div className="main">
+                <h1>Help</h1>
+            </div>
         );
     }
 }

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import "./Main.css";
 
 class Cart extends Component {
 
     render() {
         return (
-            <p>Cart</p>
+            <div className="main">
+                <h1>Cart</h1>
+            </div>
         );
     }
 }
