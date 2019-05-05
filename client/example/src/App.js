@@ -4,6 +4,7 @@ import Home from './components/Home';
 import LogIn from './components/Login';
 import Cart from './components/Cart';
 import Help from './components/Help';
+import Catalogue from './components/Catalogue';
 import NavMenu from './components/NavMenu';
 import Footer from './components/Footer';
 
@@ -19,6 +20,8 @@ class App extends Component {
               <Route path="/logIn" component={LogIn} />
               <Route path="/cart" component={Cart} />
               <Route path="/help" component={Help} />
+              <Route path="/products/:sex" component={Catalogue} exact/>
+              <Route path="/products/:sex/:category" component={Catalogue} exact/>
           </div>
         </div>
       </BrowserRouter>
