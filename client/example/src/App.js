@@ -20,7 +20,6 @@ class App extends Component {
               <Route path="/cart" component={Cart} />
               <Route path="/help" component={Help} />
           </div>
-          <Footer />
         </div>
       </BrowserRouter>
 
