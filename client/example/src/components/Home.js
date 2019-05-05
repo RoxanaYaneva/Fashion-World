@@ -3,6 +3,7 @@ import "./Main.css"
 
 const cardStyle = {
     width: '18rem',
+    'z-index': '-1',
 };
 
 const containerStyle = {
