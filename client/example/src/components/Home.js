@@ -1,12 +1,46 @@
 import React, { Component } from 'react';
 import "./Main.css"
 
+const cardStyle = {
+    width: '18rem',
+};
+
+const containerStyle = {
+    padding: '140px 20px 200px 20px',
+}
+
 class Home extends Component {
 
     render() {
         return (
-            <div className="main">
-                <h1>Home</h1>
+            <div class="row" style={containerStyle}>
+                <div class="col-sm-3">
+                    <div class="card text-center" style={cardStyle} >
+                        <div class="card-header">
+                            Рокли
+                        </div>
+                        <img class="card-img-top" src="/images/home/white_dress.png" alt="dresses"/>
+                        <a href="/women/dresses" class="btn btn-primary">Разгледай</a>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card text-center" style={cardStyle} >
+                        <div class="card-header">
+                            Мъжки тениски
+                        </div>
+                        <img class="card-img-top" src="/images/home/men_tshirt.jpg" alt="men_tshirts"/>
+                        <a href="/men/shirts" class="btn btn-primary">Разгледай</a>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card text-center" style={cardStyle} >
+                        <div class="card-header">
+                            Дамски дънки
+                        </div>
+                        <img class="card-img-top" src="/images/home/women_jeans.jpg" alt="women_jeans"/>
+                        <a href="/women/jeans" class="btn btn-primary">Разгледай</a>
+                    </div>
+                </div>
             </div>
         );
     }
