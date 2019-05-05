@@ -112,16 +112,17 @@ app.get('/product', async (req, res) => {
 });
 
 //get all products
-app.get('/allproducts',  async (req, res) =>{
-    try{
-        const resultProducts =  await pool.query(`SELECT * FROM products`);
+app.get('/products',  async (req, res) =>{
+    try {
+        console.log(req.query.sex);
+        const resultProducts =  await pool.query(`SELECT * FROM ${req.query.sex}_products`);
         var products = [];
         for (pr of resultProducts){
-            products.push([pr.product_name, pr.product_price, pr.count_available, pr.description, pr.image, pr.product_sex]);
+            products.push(pr.product_name);
         }
         res.send([errors.NO_ERROR, products]);
     }
-    catch (err){
+    catch (err) {
         res.send([errors.DB_ERROR, err]);
     }
 });
