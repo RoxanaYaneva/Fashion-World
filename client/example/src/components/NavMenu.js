@@ -34,7 +34,7 @@ const NavMenu = () => {
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/products/men/jeans">Дънки</a>
                                 <a class="dropdown-item" href="/products/men/tshirts">Тениски</a>
-                                <a class="dropdown-item" href="/products/men/sweatshirts">Пуловери</a>
+                                <a class="dropdown-item" href="/products/men/pullovers">Пуловери</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">

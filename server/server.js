@@ -114,9 +114,13 @@ app.get('/product', async (req, res) => {
 //get all products
 app.get('/products',  async (req, res) =>{
     try {
-        console.log(req.query.sex);
-        const resultProducts =  await pool.query(`SELECT * FROM ${req.query.sex}_products`);
-        res.send([errors.NO_ERROR, resultProducts]);
+        let products = [];
+        if(req.query.category) {
+            products =  await pool.query(`SELECT * FROM ${req.query.sex}_products WHERE category = '${req.query.category}'`);
+        } else {
+            products =  await pool.query(`SELECT * FROM ${req.query.sex}_products`);
+        }
+        res.send([errors.NO_ERROR, products]);
     }
     catch (err) {
         res.send([errors.DB_ERROR, err]);

@@ -29,7 +29,7 @@ class Home extends Component {
                             Мъжки тениски
                         </div>
                         <img class="card-img-top" src="/images/home/men_tshirt.jpg" alt="men_tshirts"/>
-                        <a href="/products/men/shirts" class="btn btn-primary">Разгледай</a>
+                        <a href="/products/men/tshirts" class="btn btn-primary">Разгледай</a>
                     </div>
                 </div>
                 <div class="col-sm-3">

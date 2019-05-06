@@ -19,7 +19,9 @@ class Catalogue extends Component {
     componentDidMount() {
         this.sex = this.props.match.params.sex;
         this.category = this.props.match.params.category;
-        sendRequest(`products?sex=${this.sex}`, 'GET', {}, (response) => {
+        const url = this.category ? `products?sex=${this.sex}&category=${this.category}` :
+                    `products?sex=${this.sex}`;
+        sendRequest(url, 'GET', {}, (response) => {
             this.setState({products: response});
         });
     }
