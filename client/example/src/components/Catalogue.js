@@ -7,21 +7,23 @@ class Catalogue extends Component {
         super();
         this.state = {products: []};
     }
-    
-    render() {
-        const sex = this.props.match.params.sex;
-        const category = this.props.match.params.category;
-        sendRequest(`products?sex=${sex}`, 'GET', {}, (response) => {
+
+    componentDidMount() {
+        this.sex = this.props.match.params.sex;
+        this.category = this.props.match.params.category;
+        sendRequest(`products?sex=${this.sex}`, 'GET', {}, (response) => {
             this.setState({products: response});
         });
-
+    }
+    
+    render() {
         const items = this.state.products.map((item, key) =>
         <li key={item.id}>{item}</li>
         );
 
         return (
             <div className="main">
-                <h2>TO DO: Fetch data for {sex} - {category} </h2>
+                <h2>TO DO: Fetch data for {this.sex} - {this.category} </h2>
                 <ul>{items}</ul>
             </div>
         );

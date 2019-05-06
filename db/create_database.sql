@@ -77,6 +77,7 @@ INSERT INTO women_products (product_name, product_price, description, image, cou
 ('Cool ripped jeans', 157.99, 'Cool ripped jeans for women.', 'women_ripped_jeans.jpg', 2, 'jeans'),
 ('Red Tshirt', 94.99, 'Everyday Tshirt.', 'women_red_shirt.jpg', 5, 'tshirts'),
 ('White Tshirt', 109.99, 'Casual white Tshirt.', 'women_white_shirt.jpg', 3, 'tshirts'),
+('Stripes Tshirt', 121.99, 'Casual blue Tshirt with stripes.', 'women_blue_shirt.jpg', 4, 'tshirts'),
 ('Pink Tshirt', 88.99, 'Casual pink Tshirt.', 'women_pink_shirt.jpg', 4, 'tshirts'),
 ('Pink dress', 180.99, 'Official pink dress.', 'pink_dress.jpg', 5, 'dresses'),
 ('Yellow dress', 120.99, 'Everyday dress.', 'yellow_dress.jpg', 2, 'dresses'),
