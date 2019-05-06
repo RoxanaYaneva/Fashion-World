@@ -116,11 +116,7 @@ app.get('/products',  async (req, res) =>{
     try {
         console.log(req.query.sex);
         const resultProducts =  await pool.query(`SELECT * FROM ${req.query.sex}_products`);
-        var products = [];
-        for (pr of resultProducts){
-            products.push(pr.product_name);
-        }
-        res.send([errors.NO_ERROR, products]);
+        res.send([errors.NO_ERROR, resultProducts]);
     }
     catch (err) {
         res.send([errors.DB_ERROR, err]);

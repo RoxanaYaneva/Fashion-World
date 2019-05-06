@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import sendRequest from "./Request.js";
 import "./Main.css";
 
+const cardStyle = {
+    width: '18rem',
+};
+
+const containerStyle = {
+    padding: '250px 40px 200px 20px',
+}
+
 class Catalogue extends Component {
     constructor() {
         super();
@@ -17,14 +25,25 @@ class Catalogue extends Component {
     }
     
     render() {
-        const items = this.state.products.map((item, key) =>
-        <li key={item.id}>{item}</li>
-        );
-
         return (
             <div className="main">
-                <h2>TO DO: Fetch data for {this.sex} - {this.category} </h2>
-                <ul>{items}</ul>
+                <h2> Fech data for {this.sex} - {this.category} </h2>
+
+                <div class="row" style={containerStyle}>
+                    {this.state.products.map( product =>
+                        <div class="col-sm-3">
+                            <div class="card text-center" style={cardStyle} >
+                                <div class="card-header">
+                                    {product.product_name}
+                                </div>
+                                <img class="card-img-top" src={"/images/products/" + product.image} alt="dresses"/>
+                                <p>{product.description}</p>
+                                <a href={"products/"+ this.sex + "/" + product.product_name} class="btn btn-primary">Разгледай</a>
+                            </div>
+                        </div>
+                    )} 
+                </div>
+                
             </div>
         );
     }
