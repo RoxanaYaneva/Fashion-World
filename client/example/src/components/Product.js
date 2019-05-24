@@ -26,7 +26,7 @@ class Product extends Component {
             <div className="main">
                 <Card>
                     <CardContent>
-                        <h1 color='dark-blue' size='30' gutterBottom>
+                        <h1 color='dark-blue' size='30'>
                             {this.state.product.product_name}
                         </h1>
                         <img src={"/images/products/" + this.state.product.image} alt="dresses"/>
@@ -35,7 +35,8 @@ class Product extends Component {
 
                     <CardActions>
                         <Button variant="contained" color="secondary" size="large">
-                            Add to cart
+                            Добави в количката
+                            <img src={"/images/cart.png"} alt="shopping_cart" />
                         </Button>
                     </CardActions>
                 </Card>
