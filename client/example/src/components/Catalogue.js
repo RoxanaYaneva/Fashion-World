@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
 import sendRequest from "./Request.js";
 import "./Main.css";
-
-const cardStyle = {
-    width: '18rem',
-};
-
-const containerStyle = {
-    padding: '250px 40px 200px 20px',
-}
 
 class Catalogue extends Component {
     constructor() {
@@ -31,18 +27,24 @@ class Catalogue extends Component {
             <div className="main">
                 <h2> Fech data for {this.sex} - {this.category} </h2>
 
-                <div class="row" style={containerStyle}>
+                <div class="row">
                     {this.state.products.map( product =>
-                        <div class="col-sm-3">
-                            <div class="card text-center" style={cardStyle} >
-                                <div class="card-header">
+                        <Card raised>
+                            <CardContent>
+                                <h1 color='dark-blue' size='30' gutterBottom>
                                     {product.product_name}
-                                </div>
-                                <img class="card-img-top" src={"/images/products/" + product.image} alt="dresses"/>
-                                <p>{product.description}</p>
-                                <a href={`/product/${this.sex}/${product.product_id}`} class="btn btn-primary">Разгледай</a>
-                            </div>
-                        </div>
+                                </h1>
+                                <img src={"/images/products/" + product.image} alt="dresses"/>
+                                <h2> Price: {product.product_price}</h2>
+                            </CardContent>
+        
+                            <CardActions>
+                                <Button href={`/product/${this.sex}/${product.product_id}`}
+                                variant="contained" color="secondary" size="large">
+                                    Разгледай
+                                </Button>
+                            </CardActions>
+                        </Card>
                     )} 
                 </div>
                 
