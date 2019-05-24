@@ -1,49 +1,47 @@
+import React, { Component } from 'react';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import sendRequest from "./Request.js";
+import "./Main.css";
 
+class Product extends Component {
+    constructor() {
+        super();
+        this.state = { product: {} };
+    }
 
-
-function productController(page) {
-    var filter = {gender: page};
-    var products = productStorage.filterSelectedProducts(filter);
-
-    var productsSource = $('#itemsTemplate').text();
-    var productsTemplate = Handlebars.compile(productsSource);
-    $('main').html($('#filterTemplate').html());
-
-    products.forEach(function (prod) {
-        var img = prod.image_urls['300x400']['0'].url;
-        prod.url = img;
-    });
-
-    var productsHTML = productsTemplate({items: products});
-    $('#productSelections').html(productsHTML);
-
-    $('.filters').on('click', function () {
-
-        var categories = [];
-        $('input[name=categoryFilter]:checked').each(function () {
-            categories.push($(this).val());
+    componentDidMount() {
+        this.sex = this.props.match.params.sex;
+        this.id = this.props.match.params.id;
+        const url =`products/id/${this.id}/${this.sex}`;
+        sendRequest(url, 'GET', {}, (response) => {
+            this.setState({product: response});
         });
+    }
 
-        var brands = [];
-        $('input[name=brandFilter]:checked').each(function () {
-            brands.push($(this).val());
-        });
+    render() {
+        return (
+            <div className="main">
+                <Card>
+                    <CardContent>
+                        <h1 color='dark-blue' size='30' gutterBottom>
+                            {this.state.product.product_name}
+                        </h1>
+                        <img src={"/images/products/" + this.state.product.image} alt="dresses"/>
+                        <h2> Price: {this.state.product.product_price}</h2>
+                    </CardContent>
 
-        filter.category = categories;
-        filter.brand = brands;
-        products = productStorage.filterSelectedProducts(filter);
+                    <CardActions>
+                        <Button variant="contained" color="secondary" size="large">
+                            Add to cart
+                        </Button>
+                    </CardActions>
+                </Card>
+            </div>
+        );
+    }
+};
+export default Product;
 
-        var productsHTML = productsTemplate({items: products});
-        $('#productSelections').html(productsHTML);
-
-        $('.items').on('click', function () {
-            var title = $(this).children().eq(1).text();
-            itemController(title);
-        });
-      
-    });
-    $('.items').on('click', function () {
-        var title = $(this).children().eq(1).text();
-        itemController(title);
-    });
-}

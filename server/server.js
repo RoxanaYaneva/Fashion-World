@@ -99,32 +99,38 @@ app.post('/customer', async (req, res) => {
         res.send([errors.DB_ERROR, err]);}   
 });
 
-//search for product
-app.get('/product', async (req, res) => {
-    var name = mysqlEscape(req.query.product_name);
-    try {  
-        const resultProduct =  await pool.query(`SELECT * FROM products WHERE product_name='${name}'`);
-        res.send([errors.NO_ERROR, resultProduct]);
-    }
-    catch (err) {    
-       res.send([errors.DB_ERROR, err]);
-    }   
-});
 
-//get all products
-app.get('/products',  async (req, res) =>{
+//get all products for the requested gender
+app.get('/products/sex/:sex',  async (req, res) =>{
     try {
-        let products = [];
-        if(req.query.category) {
-            products =  await pool.query(`SELECT * FROM ${req.query.sex}_products WHERE category = '${req.query.category}'`);
-        } else {
-            products =  await pool.query(`SELECT * FROM ${req.query.sex}_products`);
-        }
+        const  products =  await pool.query(`SELECT * FROM ${req.params.sex}_products`);
         res.send([errors.NO_ERROR, products]);
     }
     catch (err) {
         res.send([errors.DB_ERROR, err]);
     }
+});
+
+//get all products in a category for the requested gender
+app.get('/products/category/:category/:sex',  async (req, res) =>{
+    try {
+        const products =  await pool.query(`SELECT * FROM ${req.params.sex}_products WHERE category = '${req.params.category}'`);
+        res.send([errors.NO_ERROR, products]);
+    }
+    catch (err) {
+        res.send([errors.DB_ERROR, err]);
+    }
+});
+
+//search for product by id
+app.get('/products/id/:id/:sex', async (req, res) => {
+    try {  
+        const resultProduct =  await pool.query(`SELECT * FROM ${req.params.sex}_products WHERE product_id = '${req.params.id}'`);
+        res.send([errors.NO_ERROR, resultProduct[0]]);
+    }
+    catch (err) {    
+       res.send([errors.DB_ERROR, err]);
+    }   
 });
 
 //order product

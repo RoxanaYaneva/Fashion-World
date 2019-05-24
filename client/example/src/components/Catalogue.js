@@ -19,8 +19,8 @@ class Catalogue extends Component {
     componentDidMount() {
         this.sex = this.props.match.params.sex;
         this.category = this.props.match.params.category;
-        const url = this.category ? `products?sex=${this.sex}&category=${this.category}` :
-                    `products?sex=${this.sex}`;
+        const url = this.category ? `products/category/${this.category}/${this.sex}` :
+                    `products/sex/${this.sex}`;
         sendRequest(url, 'GET', {}, (response) => {
             this.setState({products: response});
         });
@@ -40,7 +40,7 @@ class Catalogue extends Component {
                                 </div>
                                 <img class="card-img-top" src={"/images/products/" + product.image} alt="dresses"/>
                                 <p>{product.description}</p>
-                                <a href={"products/"+ this.sex + "/" + product.product_name} class="btn btn-primary">Разгледай</a>
+                                <a href={`/product/${this.sex}/${product.product_id}`} class="btn btn-primary">Разгледай</a>
                             </div>
                         </div>
                     )} 

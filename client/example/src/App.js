@@ -5,6 +5,7 @@ import LogIn from './components/Login';
 import Cart from './components/Cart';
 import Help from './components/Help';
 import Catalogue from './components/Catalogue';
+import Product from './components/Product';
 import NavMenu from './components/NavMenu';
 import Footer from './components/Footer';
 
@@ -22,6 +23,8 @@ class App extends Component {
               <Route path="/help" component={Help} />
               <Route path="/products/:sex" component={Catalogue} exact/>
               <Route path="/products/:sex/:category" component={Catalogue} exact/>
+              <Route path="/product/:sex/:id" component={Product} />
+
           </div>
         </div>
       </BrowserRouter>
