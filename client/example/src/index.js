@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
+import { createStore } from 'redux'
+import mainReducer from './store/reducers'
+
+const store = createStore(mainReducer)
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

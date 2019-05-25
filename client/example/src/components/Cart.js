@@ -1,19 +1,45 @@
-import React, { Component } from 'react';
-import "./Main.css";
+// import React, { Component } from 'react';
+// import "./Main.css";
 
-class Cart extends Component {
+// class Cart extends Component {
 
-    render() {
-        return (
-            <div className="main">
-                <h1 class="center">Вашата количка е празна</h1>
-                <a href="/" class="btn btn-primary">Разгледайте нашите продукти</a>
-            </div>
-        );
-    }
+//     render() {
+//         return (
+//             <div className="main">
+                
+//                 <h1 class="center">Вашата количка е празна</h1>
+//                 <a href="/" class="btn btn-primary">Разгледайте нашите продукти</a>
+//             </div>
+//         );
+//     }
+// }
+
+// export default Cart;
+
+import { connect } from 'react-redux'
+import { decreaseProductCountInCart } from '../store/actions'
+import CartList from './CartList'
+
+const mapStateToProps = state => {
+  return{
+    products: state.products,
+  }
 }
 
-export default Cart;
+const mapDispatchToProps = dispatch => {
+  return {
+    onButtonClick: (id, count) => {
+      dispatch(decreaseProductCountInCart(id, count))
+    }
+  }
+}
+
+const FilterLink = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CartList)
+
+export default FilterLink
 
 // function cartController() {
 //     if ((sessionStorage.getItem('cart') != null) && (JSON.parse(sessionStorage.getItem('cart')).length > 0)) {
