@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -11,6 +14,23 @@ import { decreaseProductCountInCart } from '../store/actions';
 import "./Main.css";
 
 const range = (n, A = []) => (n === 1) ? [n, ...A] : range(n - 1, [n, ...A]);
+const styles = {
+    ul : {
+        'list-style-type': 'none',
+    },
+    card: {
+        'margin-bottom': '10px',
+    },
+    image: {
+        height: '200px',
+    },
+    details: {
+      height: '270px',
+      float: 'left',
+      'padding-left': '30px',
+      margin: 'auto auto',
+    },
+};
 
 class Cart extends Component {
     constructor() {
@@ -37,28 +57,33 @@ class Cart extends Component {
             <div className="main">
                 
                 <h1>Products In Cart </h1>
-                <ul>
+                <ul style={styles.ul}>
                     {this.props.products.map( product =>
                         <li>
-                            <h1 color='dark-blue' size='30'>
-                                {product.product_name}
-                            </h1>
-                            <img src={"/images/products/" + product.image} alt="dresses"/>
-                            <h2> Price: {product.product_price}</h2>
-                        
-                            <FormControl>
-                                <InputLabel htmlFor="age-native-helper">Count</InputLabel>
-                                <Select
-                                value={this.state.counts[product.product_name]}
-                                onChange={this.handleChange}
-                                input={<Input name={product.product_name} id="age-native-helper" />}
-                                >
-                                {range(product.count_available).map((count) => (
-                                    <MenuItem value={count}>{count}</MenuItem>
-                                ))}                       
-                                </Select>
-                                <FormHelperText>Choose how many of this product to purchase</FormHelperText>
-                            </FormControl>
+                        <Card style={styles.card}>
+                            <div style={styles.details}>
+                                <h1 color='dark-blue' size='30'>
+                                    {product.product_name}
+                                </h1>
+                                <img style={styles.image} src={"/images/products/" + product.image} alt="dresses"/>
+                            </div>
+                            <div style={styles.details}>
+                                <h2> Price: {product.product_price}</h2>
+                                <FormControl >
+                                    <InputLabel htmlFor="age-native-helper">Count</InputLabel>
+                                    <Select
+                                    value={this.state.counts[product.product_name]}
+                                    onChange={this.handleChange}
+                                    input={<Input name={product.product_name} id="age-native-helper" />}
+                                    >
+                                    {range(product.count_available).map((count) => (
+                                        <MenuItem value={count}>{count}</MenuItem>
+                                    ))}
+                                    </Select>
+                                    <FormHelperText>Choose how many of this product to purchase</FormHelperText>
+                                </FormControl>
+                            </div>
+                        </Card>
                         </li>
                     )} 
                 </ul> 
