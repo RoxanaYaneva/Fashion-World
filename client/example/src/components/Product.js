@@ -4,6 +4,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import sendRequest from "./Request.js";
+import { connect } from 'react-redux';
 import "./Main.css";
 
 class Product extends Component {
@@ -21,7 +22,12 @@ class Product extends Component {
         });
     }
 
+    handleClick = () =>  {
+        this.props.addProductToCart({ ...this.state.product, count: 1});
+    }
+
     render() {
+        console.log(this.props);
         return (
             <div className="main">
                 <Card>
@@ -34,7 +40,7 @@ class Product extends Component {
                     </CardContent>
 
                     <CardActions>
-                        <Button variant="contained" color="secondary" size="large">
+                        <Button onClick={this.handleClick} variant="contained" color="secondary" size="large">
                             Добави в количката
                             <img src={"/images/cart.png"} alt="shopping_cart" />
                         </Button>
@@ -44,5 +50,13 @@ class Product extends Component {
         );
     }
 };
-export default Product;
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addProductToCart: (product) => {
+            dispatch({type: 'ADD_PRODUCT_TO_CART', product })
+        }  
+    }
+}
+export default connect(null, mapDispatchToProps)(Product);
 

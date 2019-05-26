@@ -5,16 +5,17 @@ import {
 } from './actions'
 
 
-function productsInCart(state = [], action) {
+const initState = {
+  products: [],
+}
+
+function productsInCart(state = initState, action) {
   switch (action.type) {
     case ADD_PRODUCT_TO_CART:
-      return [
-        ...state,
-        {
-          id: action.productId,
-          count: action.count,
-        },
-      ]
+      console.log(state.products)
+      return {
+        products: [...state.products, action.product ]
+    }
     case DECREASE_PRODUCT_COUNT_IN_CART: {
         let newState = [...state];
         const index = state.findIndex(pr => pr.id === action.productId);
@@ -35,8 +36,9 @@ function productsInCart(state = [], action) {
   }
 }
 
-const mainReducer = combineReducers({
-  productsInCart,
-})
+// const mainReducer = combineReducers({
+//   productsInCart,
+// })
+const mainReducer = productsInCart
 
 export default mainReducer

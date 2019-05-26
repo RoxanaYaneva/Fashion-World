@@ -1,30 +1,71 @@
-// import React, { Component } from 'react';
-// import "./Main.css";
+import React, { Component } from 'react';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { connect } from 'react-redux';
+import { decreaseProductCountInCart } from '../store/actions';
+import "./Main.css";
 
-// class Cart extends Component {
 
-//     render() {
-//         return (
-//             <div className="main">
+class Cart extends Component {
+    handleChange = (event) => {
+        this.props.products.find(pr => pr.name === event.target.name).count = event.target.value;
+    }
+
+    render() {
+        return (
+            <div className="main">
                 
-//                 <h1 class="center">Вашата количка е празна</h1>
-//                 <a href="/" class="btn btn-primary">Разгледайте нашите продукти</a>
-//             </div>
-//         );
-//     }
-// }
+                <h1>Products In Cart </h1>
+                <ul>
+                    {this.props.products.map( product =>
+                        <li>
+                            <h1 color='dark-blue' size='30'>
+                                {product.product_name}
+                            </h1>
+                            <img src={"/images/products/" + product.image} alt="dresses"/>
+                            <h2> Price: {product.product_price}</h2>
 
-// export default Cart;
-
-import { connect } from 'react-redux'
-import { decreaseProductCountInCart } from '../store/actions'
-import CartList from './CartList'
-
-const mapStateToProps = state => {
-  return{
-    products: state.products,
-  }
+                        
+                            <FormControl>
+                                <InputLabel htmlFor="age-native-helper">Count</InputLabel>
+                                <Select
+                                value={product.count}
+                                onChange={this.handleChange}
+                                input={<Input name={product.product_name} id="age-native-helper" />}
+                                >
+                                <option value="" />
+                                {[...Array(product.count_available).keys()].map((count) => (
+                                    <option value={count}>{count}</option>
+                                ))}                       
+                                </Select>
+                                <FormHelperText>Choose how many of this product to purchase</FormHelperText>
+                            </FormControl>
+                        </li>
+                    )} 
+                </ul> 
+                {this.props.products.length === 0 &&
+                    <div>
+                        <h1 class="center">Вашата количка е празна</h1>
+                        <a href="/" class="btn btn-primary">Разгледайте нашите продукти</a>
+                    </div>
+                }
+                    
+            </div>
+        );
+    }
 }
+
+
+const mapStateToProps = (state) => {
+    return {
+        products: state.products,
+    }
+}
+
+export default connect(mapStateToProps)(Cart) ;
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -34,12 +75,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const FilterLink = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CartList)
-
-export default FilterLink
 
 // function cartController() {
 //     if ((sessionStorage.getItem('cart') != null) && (JSON.parse(sessionStorage.getItem('cart')).length > 0)) {
