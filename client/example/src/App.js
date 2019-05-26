@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import Notifications from 'react-notify-toast';
 import Home from './components/Home';
 import LogIn from './components/Login';
 import Cart from './components/Cart';
@@ -15,6 +16,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
+          <Notifications options={{zIndex: 200, top: '20px'}} />
           <NavMenu />
           <div>
               <Route path="/" component={Home} exact />

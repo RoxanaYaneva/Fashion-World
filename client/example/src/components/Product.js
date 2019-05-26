@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { notify } from 'react-notify-toast';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -24,6 +25,7 @@ class Product extends Component {
 
     handleClick = () =>  {
         this.props.addProductToCart(this.state.product);
+        notify.show('Продуктът беше добавен в количката Ви!','success', 2000,);
     }
 
     render() {
