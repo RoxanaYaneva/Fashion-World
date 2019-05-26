@@ -55,8 +55,6 @@ class Cart extends Component {
     render() {
         return (
             <div className="main">
-                
-                <h1>Products In Cart </h1>
                 <ul style={styles.ul}>
                     {this.props.products.map( product =>
                         <li>
