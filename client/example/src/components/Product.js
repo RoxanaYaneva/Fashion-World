@@ -23,7 +23,7 @@ class Product extends Component {
     }
 
     handleClick = () =>  {
-        this.props.addProductToCart({ ...this.state.product, count: 1});
+        this.props.addProductToCart(this.state.product);
     }
 
     render() {

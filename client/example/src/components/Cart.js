@@ -4,14 +4,31 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import { connect } from 'react-redux';
 import { decreaseProductCountInCart } from '../store/actions';
 import "./Main.css";
 
+const range = (n, A = []) => (n === 1) ? [n, ...A] : range(n - 1, [n, ...A]);
 
 class Cart extends Component {
+    constructor() {
+        super();
+        this.state = { counts: {} };
+    }
+
     handleChange = (event) => {
-        this.props.products.find(pr => pr.name === event.target.name).count = event.target.value;
+        const newCounts = {
+            ...this.state.counts,
+            [event.target.name] : event.target.value,
+        };
+        this.setState({ counts: newCounts });
+    }
+
+    componentWillMount() {
+        this.props.products.forEach(pr => {
+            this.state.counts[pr.product_name] = 1;
+        });
     }
 
     render() {
@@ -27,18 +44,16 @@ class Cart extends Component {
                             </h1>
                             <img src={"/images/products/" + product.image} alt="dresses"/>
                             <h2> Price: {product.product_price}</h2>
-
                         
                             <FormControl>
                                 <InputLabel htmlFor="age-native-helper">Count</InputLabel>
                                 <Select
-                                value={product.count}
+                                value={this.state.counts[product.product_name]}
                                 onChange={this.handleChange}
                                 input={<Input name={product.product_name} id="age-native-helper" />}
                                 >
-                                <option value="" />
-                                {[...Array(product.count_available).keys()].map((count) => (
-                                    <option value={count}>{count}</option>
+                                {range(product.count_available).map((count) => (
+                                    <MenuItem value={count}>{count}</MenuItem>
                                 ))}                       
                                 </Select>
                                 <FormHelperText>Choose how many of this product to purchase</FormHelperText>
