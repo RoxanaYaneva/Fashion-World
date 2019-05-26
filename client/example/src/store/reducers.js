@@ -14,8 +14,9 @@ function productsInCart(state = initState, action) {
     case ADD_PRODUCT_TO_CART:
       console.log(state.products)
       return {
-        products: [...state.products, action.product ]
-    }
+        ...state,
+        products: [...state.products, action.product],
+      }
     case DECREASE_PRODUCT_COUNT_IN_CART: {
         let newState = [...state];
         const index = state.findIndex(pr => pr.id === action.productId);

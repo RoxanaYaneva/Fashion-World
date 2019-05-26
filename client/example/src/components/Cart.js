@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -64,7 +65,7 @@ class Cart extends Component {
                 {this.props.products.length === 0 &&
                     <div>
                         <h1 class="center">Вашата количка е празна</h1>
-                        <a href="/" class="btn btn-primary">Разгледайте нашите продукти</a>
+                        <Link to="/" class="btn btn-primary">Разгледайте нашите продукти</Link>
                     </div>
                 }
                     

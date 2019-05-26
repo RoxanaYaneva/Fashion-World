@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -39,10 +40,11 @@ class Catalogue extends Component {
                             </CardContent>
         
                             <CardActions>
-                                <Button href={`/product/${this.sex}/${product.product_id}`}
-                                variant="contained" color="secondary" size="large">
-                                    Разгледай
-                                </Button>
+                                <Link to={`/product/${this.sex}/${product.product_id}`} >
+                                    <Button variant="contained" color="secondary" size="large">
+                                        Разгледай
+                                    </Button>
+                                </Link>
                             </CardActions>
                         </Card>
                     )} 

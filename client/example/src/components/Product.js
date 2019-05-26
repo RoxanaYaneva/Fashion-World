@@ -26,6 +26,7 @@ class Product extends Component {
     handleClick = () =>  {
         this.props.addProductToCart(this.state.product);
         notify.show('Продуктът беше добавен в количката Ви!','success', 2000,);
+        this.props.history.push('/cart');
     }
 
     render() {

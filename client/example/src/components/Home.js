@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import "./Main.css"
 
 const cardStyle = {
@@ -20,7 +21,7 @@ class Home extends Component {
                             Рокли
                         </div>
                         <img class="card-img-top" src="/images/home/white_dress.png" alt="dresses"/>
-                        <a href="/products/women/dresses" class="btn btn-primary">Разгледай</a>
+                        <Link to="/products/women/dresses" class="btn btn-primary">Разгледай</Link>
                     </div>
                 </div>
                 <div class="col-sm-3">
@@ -29,7 +30,7 @@ class Home extends Component {
                             Мъжки тениски
                         </div>
                         <img class="card-img-top" src="/images/home/men_tshirt.jpg" alt="men_tshirts"/>
-                        <a href="/products/men/tshirts" class="btn btn-primary">Разгледай</a>
+                        <Link to="/products/men/tshirts" class="btn btn-primary">Разгледай</Link>
                     </div>
                 </div>
                 <div class="col-sm-3">
@@ -38,7 +39,7 @@ class Home extends Component {
                             Дамски дънки
                         </div>
                         <img class="card-img-top" src="/images/home/women_jeans.jpg" alt="women_jeans"/>
-                        <a href="/products/women/jeans" class="btn btn-primary">Разгледай</a>
+                        <Link to="/products/women/jeans" class="btn btn-primary">Разгледай</Link>
                     </div>
                 </div>
             </div>

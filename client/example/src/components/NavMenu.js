@@ -1,5 +1,5 @@
 import React  from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import './NavMenu.css'
 
 const NavMenu = () => {
@@ -28,23 +28,23 @@ const NavMenu = () => {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="/products/men" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <Link class="nav-link dropdown-toggle" to="/products/men" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Мъже
-                            </a>
+                            </Link>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/products/men/jeans">Дънки</a>
-                                <a class="dropdown-item" href="/products/men/tshirts">Тениски</a>
-                                <a class="dropdown-item" href="/products/men/pullovers">Пуловери</a>
+                                <Link class="dropdown-item" to="/products/men/jeans">Дънки</Link>
+                                <Link class="dropdown-item" to="/products/men/tshirts">Тениски</Link>
+                                <Link class="dropdown-item" to="/products/men/pullovers">Пуловери</Link>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="/products/women" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <Link class="nav-link dropdown-toggle" to="/products/women" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Жени
-                            </a>
+                            </Link>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/products/women/jeans">Дънки</a>
-                                <a class="dropdown-item" href="/products/women/tshirts">Тениски</a>
-                                <a class="dropdown-item" href="/products/women/dresses">Рокли</a>
+                                <Link class="dropdown-item" to="/products/women/jeans">Дънки</Link>
+                                <Link class="dropdown-item" to="/products/women/tshirts">Тениски</Link>
+                                <Link class="dropdown-item" to="/products/women/dresses">Рокли</Link>
                             </div>
                         </li>
                     </ul>
