@@ -52,19 +52,24 @@ class Cart extends Component {
         const productsToOrder = this.props.products
             .map(pr => ({...pr, quantity: this.state.counts[pr.product_name] }));
         sendRequest(url, 'PUT', { products: productsToOrder }, (response) => {
+            this.props.products.forEach(pr => this.props.removeProductFromCart(pr.product_id));
+            this.forceUpdate();
             notify.show(response, 'success', 1500);
         });
     }
 
-    removeProductFromCart = (id) => {
-        // this.props.removeProductFromCart(id);
-        // notify.show('Продуктът беше премахнат от количката Ви!','success', 2000,);
+    removeProductFromCart = (product) => {
+        this.props.removeProductFromCart(product.product_id);
+        this.forceUpdate();
+        notify.show(`Продуктът ${product.product_name} беше премахнат от количката Ви!`,'success', 2000,);
     }
 
     componentWillMount() {
+        let newCounts = {};
         this.props.products.forEach(pr => {
-            this.state.counts[pr.product_name] = 1;
+            newCounts[pr.product_name] = 1;
         });
+        this.setState({ counts: newCounts });
     }
 
     render() {
@@ -97,7 +102,7 @@ class Cart extends Component {
                                 </FormControl>
 
                             </div>
-                            <Button onClick={() => this.removeProductFromCart(product.product_id)}
+                            <Button onClick={() => this.removeProductFromCart(product)}
                             variant="contained" color="secondary" size="large">
                                 Премахни от количката
                             </Button>
@@ -145,7 +150,7 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps)(Cart) ;
+export default connect(mapStateToProps, mapDispatchToProps)(Cart) ;
 
 // function cartController() {
 //     if ((sessionStorage.getItem('cart') != null) && (JSON.parse(sessionStorage.getItem('cart')).length > 0)) {

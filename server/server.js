@@ -137,9 +137,6 @@ app.get('/products/id/:id', async (req, res) => {
 
 //order product
 app.put('/order', async (req, res) => {
-    console.log(req.body.products);
-    // res.send([errors.NO_ERROR, 'Order was successful.']);
-     
     const handleProduct = (product) => new Promise(async (resolve) => {
         if (product.count_available > product.quantity) {
             const newCount = product.count_available - product.quantity;
