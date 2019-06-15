@@ -17,7 +17,7 @@ class Product extends Component {
     componentDidMount() {
         this.sex = this.props.match.params.sex;
         this.id = this.props.match.params.id;
-        const url =`products/id/${this.id}/${this.sex}`;
+        const url =`products/id/${this.id}`;
         sendRequest(url, 'GET', {}, (response) => {
             this.setState({product: response});
         });

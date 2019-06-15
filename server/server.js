@@ -9,9 +9,11 @@ const dotenv = require('dotenv');
 
 const PORT = 8080;
 
-const errors = {NO_ERROR:0,
-    DB_ERROR:1,
-    SERVER_ERROR:2};
+const errors = {
+    NO_ERROR: 0,
+    DB_ERROR: 1,
+    SERVER_ERROR: 2
+};
 
 dotenv.config();
 //Database 
@@ -103,7 +105,7 @@ app.post('/customer', async (req, res) => {
 //get all products for the requested gender
 app.get('/products/sex/:sex',  async (req, res) =>{
     try {
-        const  products =  await pool.query(`SELECT * FROM ${req.params.sex}_products`);
+        const  products =  await pool.query(`SELECT * FROM products WHERE sex='${req.params.sex}'`);
         res.send([errors.NO_ERROR, products]);
     }
     catch (err) {
@@ -114,7 +116,7 @@ app.get('/products/sex/:sex',  async (req, res) =>{
 //get all products in a category for the requested gender
 app.get('/products/category/:category/:sex',  async (req, res) =>{
     try {
-        const products =  await pool.query(`SELECT * FROM ${req.params.sex}_products WHERE category = '${req.params.category}'`);
+        const products =  await pool.query(`SELECT * FROM products WHERE sex='${req.params.sex}' AND category='${req.params.category}'`);
         res.send([errors.NO_ERROR, products]);
     }
     catch (err) {
@@ -123,9 +125,9 @@ app.get('/products/category/:category/:sex',  async (req, res) =>{
 });
 
 //search for product by id
-app.get('/products/id/:id/:sex', async (req, res) => {
+app.get('/products/id/:id', async (req, res) => {
     try {  
-        const resultProduct =  await pool.query(`SELECT * FROM ${req.params.sex}_products WHERE product_id = '${req.params.id}'`);
+        const resultProduct =  await pool.query(`SELECT * FROM products WHERE product_id='${req.params.id}'`);
         res.send([errors.NO_ERROR, resultProduct[0]]);
     }
     catch (err) {    
@@ -134,16 +136,30 @@ app.get('/products/id/:id/:sex', async (req, res) => {
 });
 
 //order product
-app.put('/purchase', async (req, res) =>{
-    const product_name = req.body.product_name;
-    const quantity=req.body.quantity;
-    try{ 
-        await pool.query(`UPDATE products SET count_available = ${quantity} WHERE product_name = '${product_name}'`);
-        return res.send([errors.NO_ERROR, "Order was successful."]); 
-    }
-    catch (err){
-        res.send([errors.DB_ERROR, err]);
-    }
+app.put('/order', async (req, res) => {
+    console.log(req.body.products);
+    // res.send([errors.NO_ERROR, 'Order was successful.']);
+     
+    const handleProduct = (product) => new Promise(async (resolve) => {
+        if (product.count_available > product.quantity) {
+            const newCount = product.count_available - product.quantity;
+            await pool.query(`UPDATE products SET count_available=${newCount} WHERE product_id='${product.product_id}'`);
+            resolve({ success : true, msg: `Order was successful. You ordered ${product.quantity} of ${product.product_name} product`}); 
+        } else if (product.count_available === product.quantity){
+            await pool.query(`DELETE FROM products WHERE product_id='${product.product_id}'`);
+            resolve({ success: true, msg: `Order was successful. You ordered all of ${product.product_name}`});
+        } else {
+            resolve({ success: false, msg:`Order was not successful. There are not so many ${product.product_name}s available`});
+        }
+    })
+    
+    Promise.all(req.body.products.map(pr => handleProduct(pr))).then((results) => {
+        if (results.every(res => res.success === true)) {
+            res.send([errors.NO_ERROR, 'Your order was successful']);
+        } else {
+            res.send([errors.SERVER_ERROR, results.map(res => res.msg)]);
+        }
+    });
 });
 
 //get count of products

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import {
   ADD_PRODUCT_TO_CART,
-  DECREASE_PRODUCT_COUNT_IN_CART,
+  REMOVE_PRODUCT_FROM_CART,
 } from './actions'
 
 
@@ -17,20 +17,26 @@ function productsInCart(state = initState, action) {
         ...state,
         products: [...state.products, action.product],
       }
-    case DECREASE_PRODUCT_COUNT_IN_CART: {
+    case REMOVE_PRODUCT_FROM_CART: {
         let newState = [...state];
         const index = state.findIndex(pr => pr.id === action.productId);
         if (index) {
-            if (newState[index].count <= action.count) {
-                newState.splice(index, 1);
-                return newState;
-            } else {
-                newState[index].count -= action.count;
-                return newState; 
-            }
+          newState.splice(index, 1);
+          return newState;
         } else {
-            return state;
+          return state;
         }
+        // if (index) {
+        //     if (newState[index].count <= action.count) {
+        //         newState.splice(index, 1);
+        //         return newState;
+        //     } else {
+        //         newState[index].count -= action.count;
+        //         return newState; 
+        //     }
+        // } else {
+        //     return state;
+        // }
     }
     default:
       return state

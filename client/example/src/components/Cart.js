@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { notify } from 'react-notify-toast';
+import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
-import { decreaseProductCountInCart } from '../store/actions';
+import sendRequest from "./Request.js";
 import "./Main.css";
 
 const range = (n, A = []) => (n === 1) ? [n, ...A] : range(n - 1, [n, ...A]);
@@ -38,12 +39,26 @@ class Cart extends Component {
         this.state = { counts: {} };
     }
 
-    handleChange = (event) => {
+    handleSelectionChange = (event) => {
         const newCounts = {
             ...this.state.counts,
             [event.target.name] : event.target.value,
         };
         this.setState({ counts: newCounts });
+    }
+
+    orderProducts = () => {
+        const url =`order`;
+        const productsToOrder = this.props.products
+            .map(pr => ({...pr, quantity: this.state.counts[pr.product_name] }));
+        sendRequest(url, 'PUT', { products: productsToOrder }, (response) => {
+            notify.show(response, 'success', 1500);
+        });
+    }
+
+    removeProductFromCart = (id) => {
+        // this.props.removeProductFromCart(id);
+        // notify.show('Продуктът беше премахнат от количката Ви!','success', 2000,);
     }
 
     componentWillMount() {
@@ -71,7 +86,7 @@ class Cart extends Component {
                                     <InputLabel htmlFor="age-native-helper">Count</InputLabel>
                                     <Select
                                     value={this.state.counts[product.product_name]}
-                                    onChange={this.handleChange}
+                                    onChange={this.handleSelectionChange}
                                     input={<Input name={product.product_name} id="age-native-helper" />}
                                     >
                                     {range(product.count_available).map((count) => (
@@ -80,17 +95,34 @@ class Cart extends Component {
                                     </Select>
                                     <FormHelperText>Choose how many of this product to purchase</FormHelperText>
                                 </FormControl>
+
                             </div>
+                            <Button onClick={() => this.removeProductFromCart(product.product_id)}
+                            variant="contained" color="secondary" size="large">
+                                Премахни от количката
+                            </Button>
                         </Card>
                         </li>
                     )} 
                 </ul> 
-                {this.props.products.length === 0 &&
-                    <div>
-                        <h1 class="center">Вашата количка е празна</h1>
-                        <Link to="/" class="btn btn-primary">Разгледайте нашите продукти</Link>
-                    </div>
+                <Grid container spacing={0} direction="column"
+                alignItems="center"
+                style={{ minHeight: '100vh' }}
+                >
+                {this.props.products.length > 0 &&
+                    <Grid item>
+                        <Button onClick={() => this.orderProducts()} variant="contained" color="secondary" size="large">
+                            Купи
+                        </Button>
+                    </Grid>   
                 }
+                {this.props.products.length === 0 &&
+                    <Grid item>
+                        <h1>Вашата количка е празна</h1>
+                        <Link to="/" class="btn btn-primary">Разгледайте нашите продукти</Link>
+                    </Grid>
+                }
+                </Grid> 
                     
             </div>
         );
@@ -104,16 +136,16 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Cart) ;
 
 const mapDispatchToProps = dispatch => {
-  return {
-    onButtonClick: (id, count) => {
-      dispatch(decreaseProductCountInCart(id, count))
+    return {
+        removeProductFromCart: (id) => {
+            dispatch({type: 'REMOVE_PRODUCT_FROM_CART', id })
+        }
     }
-  }
 }
 
+export default connect(mapStateToProps)(Cart) ;
 
 // function cartController() {
 //     if ((sessionStorage.getItem('cart') != null) && (JSON.parse(sessionStorage.getItem('cart')).length > 0)) {
