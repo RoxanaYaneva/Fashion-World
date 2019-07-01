@@ -4,8 +4,12 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.0.0",
+    "@material-ui/icons": "^4.2.1",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
+    "material-ui": "^0.20.2",
+    "material-ui-icons": "^1.0.0-beta.36",
+    "material-ui-popup-state": "^1.4.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-notify-toast": "^0.5.0",
