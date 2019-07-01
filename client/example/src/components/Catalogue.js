@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -26,29 +27,29 @@ class Catalogue extends Component {
     render() {
         return (
             <div className="main">
-                <h2> Fech data for {this.sex} - {this.category} </h2>
-
-                <div class="row">
+                <Grid container justify="center" spacing={5}>
                     {this.state.products.map( product =>
-                        <Card raised>
-                            <CardContent>
-                                <h1 color='dark-blue' size='30' gutterBottom>
-                                    {product.product_name}
-                                </h1>
-                                <img src={"/images/products/" + product.image} alt="dresses"/>
-                                <h2> Price: {product.product_price}</h2>
-                            </CardContent>
-        
-                            <CardActions>
-                                <Link to={`/product/${this.sex}/${product.product_id}`} >
-                                    <Button variant="contained" color="secondary" size="large">
-                                        Разгледай
-                                    </Button>
-                                </Link>
-                            </CardActions>
-                        </Card>
+                        <Grid key={product.product_id} item>
+                            <Card raised>
+                                <CardContent>
+                                    <h1 color='dark-blue' size='30' gutterBottom>
+                                        {product.product_name}
+                                    </h1>
+                                    <img src={"/images/products/" + product.image} alt="dresses"/>
+                                    <h2> Price: {product.product_price}</h2>
+                                </CardContent>
+            
+                                <CardActions>
+                                    <Link to={`/product/${this.sex}/${product.product_id}`} >
+                                        <Button variant="contained" color="secondary" size="large">
+                                            Разгледай
+                                        </Button>
+                                    </Link>
+                                </CardActions>
+                            </Card>
+                        </Grid>
                     )} 
-                </div>
+                </Grid>
                 
             </div>
         );
