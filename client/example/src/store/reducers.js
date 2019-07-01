@@ -1,15 +1,16 @@
-import { combineReducers } from 'redux';
 import {
   ADD_PRODUCT_TO_CART,
   REMOVE_PRODUCT_FROM_CART,
+  LOGIN,
 } from './actions'
 
 
 const initState = {
   products: [],
+  userId: '',
 }
 
-function productsInCart(state = initState, action) {
+function mainReducer(state = initState, action) {
   switch (action.type) {
     case ADD_PRODUCT_TO_CART:
       return {
@@ -29,6 +30,14 @@ function productsInCart(state = initState, action) {
           return state;
         }
     }
+    case LOGIN: {
+      let newUserId = action.userId;
+      return {
+        ...state,
+        userId: newUserId,
+        
+      }
+    }
     default:
       return state
   }
@@ -37,6 +46,5 @@ function productsInCart(state = initState, action) {
 // const mainReducer = combineReducers({
 //   productsInCart,
 // })
-const mainReducer = productsInCart
 
 export default mainReducer

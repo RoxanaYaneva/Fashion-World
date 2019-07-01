@@ -20,7 +20,7 @@ class App extends Component {
           <NavMenu />
           <div>
               <Route path="/" component={Home} exact />
-              <Route path="/logIn" component={LogIn} />
+              <Route path="/login" component={LogIn} />
               <Route path="/cart" component={Cart} />
               <Route path="/help" component={Help} />
               <Route path="/products/:sex" component={Catalogue} exact/>

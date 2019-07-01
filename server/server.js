@@ -12,16 +12,17 @@ const PORT = 8080;
 const errors = {
     NO_ERROR: 0,
     DB_ERROR: 1,
-    SERVER_ERROR: 2
+    SERVER_ERROR: 2,
+    NOT_FOUND: 3
 };
 
 dotenv.config();
 //Database 
 var pool = db_module.createPool({
     host     : "localhost",
-    user     : process.env.DB_USER,
-    password : process.env.DB_PASS,
-    database : process.env.DB_NAME,
+    user     : "fashiondbuser",
+    password : "fashiondbpass",
+    database : "fashiondb",
     charset  : "utf8_general_ci"
 });
 //used for ascynchronous requests
@@ -133,6 +134,24 @@ app.get('/products/id/:id', async (req, res) => {
     catch (err) {    
        res.send([errors.DB_ERROR, err]);
     }   
+});
+
+// login
+app.post('/login', async (req, res) => {
+    const user = req.body.user;
+    const pass = req.body.pass;
+    try {
+        const result = await pool.query(`SELECT customer_id FROM customers WHERE customer_name = '${user}'  AND customer_password = '${pass}'`);
+        console.log(result);
+        if (result.length > 0) {
+            res.send([errors.NO_ERROR, result[0]]);
+        } else {
+            res.send([errors.NOT_FOUND, 'Invalid username or password.']);
+        }
+    } 
+    catch (err) {
+        res.send([errors.DB_ERROR, err]);
+    }
 });
 
 //order product

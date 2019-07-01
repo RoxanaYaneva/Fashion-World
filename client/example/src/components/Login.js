@@ -1,106 +1,102 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import "./Main.css"
+import sendRequest from "./Request.js";
+import { notify } from 'react-notify-toast';
+
+const styles = {
+    form : {
+        margin: '10px 550px'
+    },
+    input : {
+        margin: '10px auto'
+    },
+    login : {
+        margin: '20px 580px'
+    },
+    submit : {
+        margin: '10px 60px',
+        background: '#FFAAAA',
+        fontWeight : 'bold',
+        border : '1px solid black'
+    },
+    // loginSucc : {
+    //     margin : '80px 580px',
+    // }
+};
 
 class LogIn extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {username:'', password:''};
+    
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        const url = 'login';
+        sendRequest(url, 'POST', { user : this.state.username , pass: this.state.password  }, (response) => {
+            this.props.setUserId(this.state.username);
+            notify.show('You logged in successfully', 'success', 1500);
+            if (response) {
+                this.props.history.push('/');
+            }
+        });
+    }
+
     render() {
-        return (
-            <div className="main">
-                <h1>LogIn</h1>
-            </div>
-        );
+        if (this.props.userId) {
+            return (
+                <div>
+                    <h1 style={styles.loginSucc}>You are already logged in!</h1>
+                    <h1 style={styles.loginSucc}>You are already logged in!</h1>
+                    <h1 style={styles.loginSucc}>You are already logged in!</h1>
+                </div>
+            );
+        } else {
+            return (
+                <div className="main">
+                    <h1 style={styles.login}>LogIn</h1>
+                    <form style={styles.form} onSubmit={this.handleSubmit}>
+                    Username: <input style={styles.input} className="no" type="text" name="username" value={this.state.username}
+                            onChange={this.handleInputChange} required></input><br/>
+                    Password: <input style={styles.input} className="no" type="password" name="password" value={this.state.password}
+                            onChange={this.handleInputChange} required></input><br/>
+                    <input style={styles.submit} className="submit" type="submit" value="Submit" />
+                    </form>
+                </div>
+            );
+        }
     }
 }
 
-export default LogIn;
+const mapStateToProps = (state) => {
+    return {
+        userId: state.userId,
+    }
+}
 
-// function loginRegisterController(){
+const mapDispatchToProps = dispatch => {
+    return {
+        setUserId: (userId) => {
+            dispatch({type: 'LOGIN', userId })
+        }
+    }
+}
 
-//     $(function(){
+ export default connect(mapStateToProps, mapDispatchToProps)(LogIn)
 
-//         $('main').html($('#loginTemplate').html());
-//         $('#registerDiv').hide();
-//         $('#regButton').css('border-bottom', 'none');
-
-//         $('#loginButton').on('click', function(){
-//             $('#loginDiv').show(100);
-//             $('#registerDiv').hide(100);
-//             $('#loginButton').css('border-bottom', '2px ridge #9d0052');
-//             $('#regButton').css('border-bottom', 'none');
-//         });
-
-//         $('#regButton').on('click', function(){
-//             $('#registerDiv').show(100);
-//             $('#loginDiv').hide(100);
-//             $('#loginButton').css('border-bottom', 'none');
-//             $('#regButton').css('border-bottom', '2px ridge #9d0052');
-//         });
-
-
-//         $('#logIn').on('click', function(){
-            
-//             var user = $('#user').val();
-//             var pass = $('#pass').val();
-
-//             data = {'name': user, 'password':pass}
-//             sendRequest( 'customer' , 'POST', data , function showResponse(response){
-//             if(response==false){
-//                 location.replace('#home');
-//                 var profile = $('<a href="#settings">&nbsp;<img src="assets/images/profileIcon.png"/><br/><span class="normalWhite">МОЯТ ПРОФИЛ</span></a>');
-//                 $('#profile').html(profile);
-//                 sessionStorage.setItem("loggedUser", JSON.stringify(user));
-//             } else {
-//                 alert('Невалидно потребителско име/парола!');
-//                 return;
-//             }  })  
-//         })
-
-
-//         $('#register').on('click', function(event){
-//             event.preventDefault();
-//             var user = $('#regUser').val();
-//             if (user == "") {
-//                 alert("Не сте въвели име!");
-//                 return;
-//             }
-//             var password = $('#regPass').val();
-//             if (password == "") {
-//                 alert("Не сте въвели парола!");
-//                 return;
-//             }
-//             var conditionsAccepted = $("input[id='conditionCheckbox']:checked").length;
-           
-           
-           
-//             data = {'name': user, 'password':password}
-//             sendRequest( 'customer' , 'POST', data , function showResponse(response){
-//              if(response==true){
-//                 if(conditionsAccepted==0){
-//                     alert("Не сте приели условията!");
-//                     return;
-//                 }
-
-//                 alert('Вие се регистрирахте успешно!');
-//                 $('#loginDiv').show(100);
-//                 $('#registerDiv').hide(100);
-//                 $('#regUser').val('');
-//                 $('#regPass').val('');
-//                 $('#loginButton').css('border-bottom', '2px ridge #9d0052');
-//                 $('#regButton').css('border-bottom', 'none');
-
-//             }else{
-//                 alert('Това потребителско име вече е заето!');
-//                 $('#regUser').val('');
-//                 $('#regPass').val('');
-//                 return;
-//             }
-    
-//             } ) ;    
-//         })
-
-
-//         updateUserInSession = (user) => {
-//             sessionStorage.setItem("loggedUser", JSON.stringify(user))
-//         }
-//     })
-// }
+//export default LogIn

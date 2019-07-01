@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `customers`;
 CREATE TABLE `customers` (
   `customer_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `customer_name` varchar(40) NOT NULL,
+  `customer_name` varchar(40) NOT NULL UNIQUE,
   `customer_password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
