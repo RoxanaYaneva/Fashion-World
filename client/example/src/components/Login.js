@@ -20,10 +20,6 @@ const styles = {
         fontWeight : 'bold',
         border : '1px solid black'
     },
-    p : {
-        color : 'blue',
-        textDecorationLine : 'underline',
-    }
     // loginSucc : {
     //     margin : '80px 580px',
     // }
@@ -84,7 +80,7 @@ class LogIn extends Component {
                             onChange={this.handleInputChange} required></input><br/>
                     Password: <input style={styles.input} className="no" type="password" name="password" value={this.state.password}
                             onChange={this.handleInputChange} required></input><br/>
-                    <p style={styles.p} onClick={this.handleClick}>Not registered yet?</p>
+                    <a href="#" style={styles.p} onClick={this.handleClick}>Not registered yet?</a>
                     <input style={styles.submit} className="submit" type="submit" value="Submit" />
                     </form>
                 </div>
