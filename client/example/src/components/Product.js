@@ -16,6 +16,22 @@ const styles = {
     textarea : {
         width : '800px',
         height : '100px',
+    },
+    box : {
+        padding : '10px',
+        border: '1px solid black',
+        margin : '0 20px 0 0',
+    },
+    name : {
+        fontWeight : 'bold',
+        padding : '10px',
+        background : '#FFAAAA',
+        margin : '20px 20px 0 0',
+    }, 
+    submit : {
+        background : '#FFAAAA',
+        fontWeight : 'bold',
+        border : '1px solid black',
     }
 }
 
@@ -53,7 +69,6 @@ class Product extends Component {
     }
 
     handleSubmit = (event) => {
-        event.preventDefault();
         const url = `products/id/${this.id}/comments`;
         sendRequest(url, 'POST', {user: this.props.userId, productId : this.props.match.params.id, text : this.state.text}, (response) => {
             notify.show('Коментарът Ви беше добавен успешно!', 'success', 1500);
@@ -93,14 +108,17 @@ class Product extends Component {
                         <p>Comment: </p>
                         <textarea name="text" onChange={this.handleInputChange} style={styles.textarea} value={this.state.text}></textarea>
                         <p>
-                            <input type="submit" onClick={this.handleSubmit} name="submit" value="submit" />
+                            <input style={styles.submit} type="submit" onClick={this.handleSubmit} name="submit" value="submit" />
                         </p>
                         </div>
                     }
                     <div>{
-                        // this.state.comments.map(comment => (
-                           // show all comments for this product
-                        // ));
+                        this.state.comments.map(comment => (
+                         <div>
+                           <p style={styles.name}>{comment.username} {comment.date_posted}</p>
+                           <p style={styles.box}>{comment.text}</p>
+                        </div>
+                        ))
                     }
                     </div>
                 </div>

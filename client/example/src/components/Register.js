@@ -26,7 +26,7 @@ class Register extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {username:'', password:''};
+        this.state = {username:'', password:'', name: ''};
     
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -45,7 +45,7 @@ class Register extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const url = 'register';
-        sendRequest(url, 'POST', { user : this.state.username , pass: this.state.password  }, (response) => {
+        sendRequest(url, 'POST', { username : this.state.username , pass: this.state.password , name : this.state.name }, (response) => {
             this.props.setUserId(this.state.username);
             notify.show('You registered successfully', 'success', 1500);
             if (response) {
@@ -69,6 +69,8 @@ class Register extends Component {
                     <h1 style={styles.login}>Register</h1>
                     <form style={styles.form} onSubmit={this.handleSubmit}>
                     Username: <input style={styles.input} className="no" type="text" name="username" value={this.state.username}
+                            onChange={this.handleInputChange} required></input><br/>
+                    Name: <input style={styles.input} className="no" type="text" name="name" value={this.state.name}
                             onChange={this.handleInputChange} required></input><br/>
                     Password: <input style={styles.input} className="no" type="password" name="password" value={this.state.password}
                             onChange={this.handleInputChange} required></input><br/>

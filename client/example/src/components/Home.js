@@ -7,7 +7,7 @@ const cardStyle = {
 };
 
 const containerStyle = {
-    padding: '250px 40px 200px 20px',
+    padding: '250px 40px 200px 340px',
 }
 
 class Home extends Component {
