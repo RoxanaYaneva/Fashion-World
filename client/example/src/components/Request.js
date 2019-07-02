@@ -1,3 +1,4 @@
+import { notify } from 'react-notify-toast';
 import jQuery from 'jquery';
 
 var appServerAddress = "http://localhost:8080/";
@@ -14,7 +15,7 @@ function sendRequest(uri, method, parameters, callback) {
             }
             else {
                 //alert the error
-                alert(result[1]);
+                notify.show(result[1],'error', 2000);
             }
         }
     });

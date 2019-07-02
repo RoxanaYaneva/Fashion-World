@@ -43,9 +43,6 @@ CREATE TABLE `products` (
   `category` enum('jeans', 'tshirts', 'pullovers', 'dresses') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-ALTER TABLE `comments` ADD FOREIGN KEY ( `product_id` )
-REFERENCES `products` ( `product_id` );
-
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
   `comment_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -54,6 +51,9 @@ CREATE TABLE `comments` (
   `username` varchar(40) NOT NULL,
   `date_posted` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `comments` ADD FOREIGN KEY ( `product_id` )
+REFERENCES `products` ( `product_id` );
 
 INSERT INTO products (product_name, product_price, sex, description, image, count_available, category) VALUES
 ('Stylish jeans', 145.99, 'men', 'Men jeans.', 'men_style_jeans.jpg', 5, 'jeans'),
