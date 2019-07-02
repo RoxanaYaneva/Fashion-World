@@ -79,9 +79,9 @@ const NavMenu = () => {
                 </PopupState>
                                 
                 
-                <NavLink className="menu__link" to="/logIn">Log In</NavLink>
-                <NavLink className="menu__link" to="/cart">Cart</NavLink>
-                <NavLink className="menu__link" to="/help">Help</NavLink>
+                <NavLink className="menu__link" to="/logIn">Вход</NavLink>
+                <NavLink className="menu__link" to="/cart">Количка</NavLink>
+                <NavLink className="menu__link" to="/help">Помощ</NavLink>
                 <ChatWindow />  
             </div> 
                 
