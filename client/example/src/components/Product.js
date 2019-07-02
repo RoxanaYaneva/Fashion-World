@@ -104,10 +104,7 @@ class Product extends Component {
                         <img src={"/images/products/" + this.state.product.image} alt="dresses"/>
                         </TableCell>
                         <TableCell padding="40px">
-                            <h2>
-                                Описание: {this.state.product.description}
-                            </h2>
-                            <h2>Пол: {this.state.product.sex}</h2>
+                            <h2>Описание: {this.state.product.description}</h2>
                             <h2>Налични бройки: {this.state.product.count_available}</h2>
                             <h2> Цена: {this.state.product.product_price}</h2>
                             <CardActions>
