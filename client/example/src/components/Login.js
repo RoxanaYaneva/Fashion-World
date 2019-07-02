@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import "./Main.css"
 import sendRequest from "./Request.js";
 import { notify } from 'react-notify-toast';
 

@@ -124,7 +124,11 @@ class Cart extends Component {
                 {this.props.products.length === 0 &&
                     <Grid item>
                         <h1>Вашата количка е празна</h1>
-                        <Link to="/" class="btn btn-primary">Разгледайте нашите продукти</Link>
+                        <Link to="/">
+                        <Button variant="contained" color="secondary" size="large">
+                        Разгледайте нашите продукти
+                                        </Button>
+                        </Link>
                     </Grid>
                 }
                 </Grid> 

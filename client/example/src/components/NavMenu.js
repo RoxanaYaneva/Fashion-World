@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import './NavMenu.css'
+import ChatWindow from './ChatWindow';
 
 const NavMenu = () => {
     return (
@@ -81,7 +82,9 @@ const NavMenu = () => {
                 <NavLink className="menu__link" to="/logIn">Log In</NavLink>
                 <NavLink className="menu__link" to="/cart">Cart</NavLink>
                 <NavLink className="menu__link" to="/help">Help</NavLink>
-            </div>       
+                <ChatWindow />  
+            </div> 
+                
     );
 }
 
