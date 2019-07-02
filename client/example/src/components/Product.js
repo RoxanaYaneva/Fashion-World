@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { notify } from 'react-notify-toast';
 import Card from '@material-ui/core/Card';
+import TableCell from '@material-ui/core/TableCell';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
@@ -19,20 +20,23 @@ const styles = {
     },
     box : {
         padding : '10px',
-        border: '1px solid black',
-        margin : '0 20px 0 0',
+        borderBottom: '1px solid black',
+        margin : '0',
     },
     name : {
         fontWeight : 'bold',
-        padding : '10px',
+        padding : '0 10px',
         background : '#FFAAAA',
-        margin : '20px 20px 0 0',
+        margin : '20px 0 0 0',
     }, 
     submit : {
         background : '#FFAAAA',
         fontWeight : 'bold',
         border : '1px solid black',
-    }
+    }, 
+    commentSec : {
+        margin: '0',
+    },
 }
 
 class Product extends Component {
@@ -77,9 +81,14 @@ class Product extends Component {
     }
 
     handleClick = () =>  {
-        this.props.addProductToCart(this.state.product);
-        notify.show('Продуктът беше добавен в количката Ви!','success', 2000,);
-        this.props.history.push('/cart');
+        if (this.props.userId) {
+            this.props.addProductToCart(this.state.product);
+            notify.show('Продуктът беше добавен в количката Ви!','success', 2000,);
+            this.props.history.push('/cart');
+        } else {
+            notify.show('Моля първо влезте в своя профил!','error', 2000);
+        }
+        
     }
 
     render() {
@@ -88,19 +97,27 @@ class Product extends Component {
             <div className="main">
                 <Card>
                     <CardContent>
+                        <TableCell align="left">
                         <h1 color='dark-blue' size='30'>
                             {this.state.product.product_name}
                         </h1>
                         <img src={"/images/products/" + this.state.product.image} alt="dresses"/>
-                        <h2> Price: {this.state.product.product_price}</h2>
-                    </CardContent>
-
-                    <CardActions>
-                        <Button onClick={this.handleClick} variant="contained" color="secondary" size="large">
-                            Добави в количката
-                            <img src={"/images/cart.png"} alt="shopping_cart" />
-                        </Button>
+                        </TableCell>
+                        <TableCell padding="40px">
+                            <h2>
+                                Описание: {this.state.product.description}
+                            </h2>
+                            <h2>Пол: {this.state.product.sex}</h2>
+                            <h2>Налични бройки: {this.state.product.count_available}</h2>
+                            <h2> Цена: {this.state.product.product_price}</h2>
+                            <CardActions>
+                                <Button onClick={this.handleClick} variant="contained" color="secondary" size="large">
+                                    Добави в количката
+                                    <img src={"/images/cart.png"} alt="shopping_cart" />
+                                </Button>
                     </CardActions>
+                        </TableCell>
+                    </CardContent>
                 </Card>
                 <div style={styles.comments}>
                     {this.props.userId &&
@@ -108,11 +125,11 @@ class Product extends Component {
                         <p>Comment: </p>
                         <textarea name="text" onChange={this.handleInputChange} style={styles.textarea} value={this.state.text}></textarea>
                         <p>
-                            <input style={styles.submit} type="submit" onClick={this.handleSubmit} name="submit" value="submit" />
+                            <input style={styles.submit} type="submit" onClick={this.handleSubmit} name="submit" value="Submit" />
                         </p>
                         </div>
                     }
-                    <div>{
+                    <div style={styles.commentSec}>{
                         this.state.comments.map(comment => (
                          <div>
                            <p style={styles.name}>{comment.username} {comment.date_posted}</p>

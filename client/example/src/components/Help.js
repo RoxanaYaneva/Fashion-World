@@ -13,7 +13,7 @@ class Help extends Component {
                 Искаш да върнеш цяла поръчка или само един продукт? 
                 Може да го направиш лесно в рамките на 30 дни от получаване на пратката. 
                 Следвай стъпките: 
-                
+
                     <ul>
                         <li>
                          Отиди в Профила си и избери секция Връщане на продукти. 
@@ -36,34 +36,3 @@ class Help extends Component {
 }
 
 export default Help;
-
-// function faqController() {
-//     $(function () {
-//         $('main').html($('#helpOptions').html() + $('#faqSection').html());
-//         $('main dd').toggle();
-//         $('main dt').on('click', function () { $(this).next().toggle() });
-//         window.scrollTo(0, 0);
-//     })
-// }
-
-// function helpController(page) {
-//     $(function () {
-//         $('main').html($('#helpOptions').html() + $('#' + page + 'Section').html());
-//         window.scrollTo(0, 0);
-//     })
-// }
-
-
-// function cartController() {
-//     $(function () {
-//         var user = sessionStorage.getItem('loggedUser');
-//         if (user) {
-
-//         } else {
-//             alert('Влезте в профила си, за да започнете пазаруването!');
-//             location.replace('#loginRegister');
-//             return;
-//         }
-//     })
-
-// }

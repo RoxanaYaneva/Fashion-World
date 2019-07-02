@@ -100,7 +100,6 @@ app.post('/register', async (req, res) => {
         res.send([errors.NO_ERROR, resultExistCustomer[0]]);
     }
     catch (err){    
-        console.log(err);
         res.send([errors.DB_ERROR, err]);}   
 });
 
@@ -151,7 +150,6 @@ app.get('/products/id/:id/comments', async (req, res) => {
         res.send([errors.NO_ERROR, resultComments]);
     }
     catch (err) {   
-       console.log(err); 
        res.send([errors.DB_ERROR, err]);
     }   
 });
@@ -174,7 +172,6 @@ app.post('/login', async (req, res) => {
     pass=sha1(pass);
     try {
         const result = await pool.query(`SELECT customer_id FROM customers WHERE username = '${user}'  AND customer_password = '${pass}'`);
-        console.log(result);
         if (result.length > 0) {
             res.send([errors.NO_ERROR, result[0]]);
         } else {
