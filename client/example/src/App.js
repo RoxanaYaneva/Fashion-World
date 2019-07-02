@@ -8,6 +8,7 @@ import Help from './components/Help';
 import Catalogue from './components/Catalogue';
 import Product from './components/Product';
 import NavMenu from './components/NavMenu';
+import Register from './components/Register';
 import Footer from './components/Footer';
 
 
@@ -21,12 +22,12 @@ class App extends Component {
           <div>
               <Route path="/" component={Home} exact />
               <Route path="/login" component={LogIn} />
+              <Route path="/register" component={Register} />
               <Route path="/cart" component={Cart} />
               <Route path="/help" component={Help} />
               <Route path="/products/:sex" component={Catalogue} exact/>
               <Route path="/products/:sex/:category" component={Catalogue} exact/>
               <Route path="/product/:sex/:id" component={Product} />
-
           </div>
         </div>
       </BrowserRouter>

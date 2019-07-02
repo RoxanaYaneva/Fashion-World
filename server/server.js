@@ -78,9 +78,9 @@ var chatNamespace = io
     })
 
 //create new customer
-app.post('/customer', async (req, res) => {
-    var name = mysqlEscape(req.body.name);
-    var pass = mysqlEscape(req.body.password);
+app.post('/register', async (req, res) => {
+    var name = req.body.user;
+    var pass = req.body.pass;
     try {
         var connection = await getConnectionAsync();
         const queryAsync = util.promisify(connection.query).bind(connection);
@@ -89,16 +89,17 @@ app.post('/customer', async (req, res) => {
         if (resultExistCustomer[0].exist != 0) {
             await queryAsync("ROLLBACK");
             connection.release();
-            return res.send([errors.NO_ERROR, false]);
-        }      
+            return res.send([errors.NO_ERROR, resultExistCustomer[0]]);
+        }     
         pass=sha1(pass);
         await queryAsync(`INSERT INTO customers (customer_name, customer_password) VALUES ('${name}', '${pass}')`);
         await queryAsync("COMMIT");
         connection.release();
         console.log("customer added");
-        res.send([errors.NO_ERROR, true]);
+        res.send([errors.NO_ERROR, resultExistCustomer[0]]);
     }
     catch (err){    
+        console.log(err);
         res.send([errors.DB_ERROR, err]);}   
 });
 
@@ -118,11 +119,38 @@ app.get('/products/sex/:sex',  async (req, res) =>{
 app.get('/products/category/:category/:sex',  async (req, res) =>{
     try {
         const products =  await pool.query(`SELECT * FROM products WHERE sex='${req.params.sex}' AND category='${req.params.category}'`);
-        res.send([errors.NO_ERROR, products]);
+        res.send([errors.NO_ERROR, pruducts]);
     }
     catch (err) {
         res.send([errors.DB_ERROR, err]);
     }
+});
+
+app.post('/products/id/:id/comments', async (req, res) => {
+    var productId = req.body.productId; 
+    const user = req.body.user;
+    const text = req.body.text;
+    console.log(productId, user, text);
+    try {
+        await queryAsync(`INSERT INTO comments (text, product_name, username) VALUES ( '${text}', '${productId}', '${user}')`);
+        res.send([errors.NO_ERROR, true]);
+    } catch (err) {
+        res.send([errors.DB_ERROR, err]);
+    }
+});
+
+// get all comments for certain product
+app.get('/products/id/:id/comments', async (req, res) => {
+    try {  
+        console.log(req.params.id);
+        const resultComments =  await pool.query(`SELECT * FROM comments WHERE product_id=${req.params.id}`);
+        console.log('resutlt' ,resultComments);
+        res.send([errors.NO_ERROR, resultComments]);
+    }
+    catch (err) {   
+       console.log(err); 
+       res.send([errors.DB_ERROR, err]);
+    }   
 });
 
 //search for product by id
@@ -139,7 +167,8 @@ app.get('/products/id/:id', async (req, res) => {
 // login
 app.post('/login', async (req, res) => {
     const user = req.body.user;
-    const pass = req.body.pass;
+    var pass = req.body.pass;
+    pass=sha1(pass);
     try {
         const result = await pool.query(`SELECT customer_id FROM customers WHERE customer_name = '${user}'  AND customer_password = '${pass}'`);
         console.log(result);

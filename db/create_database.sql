@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS `customers`;
 CREATE TABLE `customers` (
   `customer_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `customer_name` varchar(40) NOT NULL UNIQUE,
-  `customer_password` varchar(20) NOT NULL
+  `customer_password` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `customers` (`customer_id`, `customer_name`, `customer_password`) VALUES
@@ -44,10 +44,14 @@ CREATE TABLE `products` (
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
   `comment_id` int(11) NOT NULL,
-  `product_name` varchar(40) NOT NULL,
+  `text` varchar(100),
+  `product_id` int(11) NOT NULL,
   `username` varchar(40) NOT NULL,
   `date_posted` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `comments` ADD FOREIGN KEY ( `product_id` )
+REFERENCES `products` ( `product_id` );
 
 INSERT INTO products (product_name, product_price, sex, description, image, count_available, category) VALUES
 ('Stylish jeans', 145.99, 'men', 'Men jeans.', 'men_style_jeans.jpg', 5, 'jeans'),

@@ -6,7 +6,7 @@ import { notify } from 'react-notify-toast';
 
 const styles = {
     form : {
-        margin: '10px 600px'
+        margin: '10px 650px'
     },
     input : {
         margin: '10px auto'
@@ -20,16 +20,9 @@ const styles = {
         fontWeight : 'bold',
         border : '1px solid black'
     },
-    p : {
-        color : 'blue',
-        textDecorationLine : 'underline',
-    }
-    // loginSucc : {
-    //     margin : '80px 580px',
-    // }
 };
 
-class LogIn extends Component {
+class Register extends Component {
 
     constructor(props) {
         super(props);
@@ -49,17 +42,12 @@ class LogIn extends Component {
         });
     }
 
-    handleClick = (event) =>  {
-        event.preventDefault();
-        this.props.history.push('/register');
-    }
-
     handleSubmit(event) {
         event.preventDefault();
-        const url = 'login';
+        const url = 'register';
         sendRequest(url, 'POST', { user : this.state.username , pass: this.state.password  }, (response) => {
             this.props.setUserId(this.state.username);
-            notify.show('You logged in successfully', 'success', 1500);
+            notify.show('You registered successfully', 'success', 1500);
             if (response) {
                 this.props.history.push('/');
             }
@@ -78,13 +66,14 @@ class LogIn extends Component {
         } else {
             return (
                 <div className="main">
-                    <h1 style={styles.login}>LogIn</h1>
+                    <h1 style={styles.login}>Register</h1>
                     <form style={styles.form} onSubmit={this.handleSubmit}>
                     Username: <input style={styles.input} className="no" type="text" name="username" value={this.state.username}
                             onChange={this.handleInputChange} required></input><br/>
                     Password: <input style={styles.input} className="no" type="password" name="password" value={this.state.password}
                             onChange={this.handleInputChange} required></input><br/>
-                    <p style={styles.p} onClick={this.handleClick}>Not registered yet?</p>
+                    Repeat password: <input style={styles.input} className="no" type="password" name="password2" value={this.state.password}
+                            onChange={this.handleInputChange} required></input><br/>
                     <input style={styles.submit} className="submit" type="submit" value="Submit" />
                     </form>
                 </div>
@@ -107,6 +96,6 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
- export default connect(mapStateToProps, mapDispatchToProps)(LogIn)
+ export default connect(mapStateToProps, mapDispatchToProps)(Register)
 
-//export default LogIn
+//export default Register
