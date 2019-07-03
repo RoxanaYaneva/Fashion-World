@@ -68,7 +68,6 @@ class Product extends Component {
         const url2 = `products/id/${this.id}/comments`;
         sendRequest(url2, 'GET', {}, (response) => {
             this.setState({comments: response});
-            console.log(this.state.comments);
         });
     }
 
@@ -76,7 +75,11 @@ class Product extends Component {
         const url = `products/id/${this.id}/comments`;
         sendRequest(url, 'POST', {user: this.props.userId, productId : this.props.match.params.id, text : this.state.text}, (response) => {
             notify.show('Коментарът Ви беше добавен успешно!', 'success', 1500);
-            this.forceUpdate();
+            const url2 = `products/id/${this.id}/comments`;
+            this.setState({ text : '' });
+            sendRequest(url2, 'GET', {}, (response) => {
+                this.setState({comments: response});
+            });
         });
     }
 

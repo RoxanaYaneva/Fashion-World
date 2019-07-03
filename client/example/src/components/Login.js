@@ -64,9 +64,7 @@ class LogIn extends Component {
     render() {
         if (this.props.userId) {
             return (
-                <div>
-                    <h1 style={styles.loginSucc}>You are already logged in!</h1>
-                    <h1 style={styles.loginSucc}>You are already logged in!</h1>
+                <div className="main">
                     <h1 style={styles.loginSucc}>You are already logged in!</h1>
                 </div>
             );
