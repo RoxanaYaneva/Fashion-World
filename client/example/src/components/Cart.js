@@ -125,9 +125,9 @@ class Cart extends Component {
                     <Grid item>
                         <h1>Вашата количка е празна</h1>
                         <Link to="/">
-                        <Button variant="contained" color="secondary" size="large">
-                        Разгледайте нашите продукти
-                                        </Button>
+                            <Button variant="contained" color="secondary" size="large">
+                            Разгледайте нашите продукти
+                            </Button>
                         </Link>
                     </Grid>
                 }

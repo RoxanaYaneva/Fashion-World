@@ -7,7 +7,7 @@ import {
 
 const initState = {
   products: [],
-  username: '',
+  userId: '',
 }
 
 function mainReducer(state = initState, action) {
@@ -31,10 +31,10 @@ function mainReducer(state = initState, action) {
         }
     }
     case LOGIN: {
-      let newUserId = action.username;
+      let newUserId = action.userId;
       return {
         ...state,
-        username: newUserId,
+        userId: newUserId,
         
       }
     }
