@@ -56,6 +56,7 @@ var chatNamespace = io
 
         //listen on new_message
         socket.on('new_message', (data) => {
+            console.log(data);
             //broadcast the new message
             var bot = "Fashion Days Bot";
             socket.emit('new_message', {message : data.message, username : socket.username});

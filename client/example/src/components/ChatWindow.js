@@ -6,6 +6,8 @@ import sendRequest from "./Request.js";
 import { notify } from 'react-notify-toast';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import io from 'socket.io-client';
+import socketIOClient from "socket.io-client";
 
 const styles = {
     form : {
@@ -27,7 +29,22 @@ class ChatWindow extends Component {
 
     state = {
         open: false,
-    }   
+        response: 0,
+        endpoint: "http://localhost:8080/chat",
+    }  
+    
+    componentDidMount() {
+        const {endpoint} = this.state;
+        const socket = socketIOClient(endpoint);
+        //Listen for data on the "outgoing data" namespace and supply a callback for what to do when we get one. In this case, we set a state variable
+        socket.on('new_message', data => {
+            this.setState({response: data})
+        });
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+    }
 
     openChat = () => {
         this.setState({open:true});
@@ -38,6 +55,7 @@ class ChatWindow extends Component {
     }
 
     render() {
+        const {response} = this.state;
         return (
             <div>
                 {!this.state.open &&
@@ -47,10 +65,9 @@ class ChatWindow extends Component {
                 <div>
                     <form style={styles.form} className="form-container">
                     <h1>Chat</h1>
-
                     <label for="msg"><b>Message</b></label>
                     <TextField style={styles.textarea} placeholder="Type message.." name="msg" required></TextField>
-                    <Button type="submit" className="btn">Send</Button>
+                    <Button type="submit" onClick={this.handleSubmit} className="btn">Send</Button>
                     <Button onClick={this.closeChat} className="btn cancel">Close</Button>
                     </form>
                 </div>
