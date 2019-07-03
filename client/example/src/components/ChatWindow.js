@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
-import "./ChatWindow.css"
-import sendRequest from "./Request.js";
-import { notify } from 'react-notify-toast';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import io from 'socket.io-client';
 import socketIOClient from "socket.io-client";
+import "./ChatWindow.css"
 
 const styles = {
     form : {
@@ -30,6 +25,7 @@ class ChatWindow extends Component {
     state = {
         open: false,
         response: 0,
+        chatMsg: '',
         endpoint: "http://localhost:8080/chat",
     }  
     
@@ -44,6 +40,13 @@ class ChatWindow extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        socketIOClient.emit('new_message', {message : this.state.chatMsg});
+    }
+
+    handleMsgChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
     }
 
     openChat = () => {
@@ -66,7 +69,8 @@ class ChatWindow extends Component {
                     <form style={styles.form} className="form-container">
                     <h1>Chat</h1>
                     <label for="msg"><b>Message</b></label>
-                    <TextField style={styles.textarea} placeholder="Type message.." name="msg" required></TextField>
+                    <TextField style={styles.textarea} value={this.state.chatMsg}
+                    onChange={this.handleMsgChange}  placeholder="Type message.." name="msg" required></TextField>
                     <Button type="submit" onClick={this.handleSubmit} className="btn">Send</Button>
                     <Button onClick={this.closeChat} className="btn cancel">Close</Button>
                     </form>
